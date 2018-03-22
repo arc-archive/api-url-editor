@@ -31,6 +31,7 @@
         --paper-input-container-label: {
           color: #3E2723;
         };
+        @apply --layout-horizontal;
       }
 
       output {
@@ -44,6 +45,14 @@
         margin-top: 40px;
         @apply --shadow-elevation-4dp;
         padding: 24px;
+        margin-bottom: 40px;
+      }
+
+      .spacer {
+        @apply --layout-flex;
+      }
+
+      api-url-editor {
         margin-bottom: 40px;
       }
       </style>
@@ -67,11 +76,19 @@
             </template>
           </paper-listbox>
         </paper-dropdown-menu>
+        <div class="spacer"></div>
+        <paper-dropdown-menu label="Override API's base uri">
+          <paper-listbox slot="dropdown-content" id="basesList" selected="{{selectedOverrideBase}}" attr-for-selected="data-url">
+            <paper-item data-url="">Restore API's base URI</paper-item>
+            <paper-item data-url="https://domain.com/base">https://domain.com/base</paper-item>
+            <paper-item data-url="https://{version}.domain.com/base/{path}">https://{version}.domain.com/base/{path}</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
       </header>
       <section role="main" class="vertical-section-container centered main">
-        <api-url-editor base-uri="[[baseUri]]" endpoint-path="[[endpointPath]]" query-model="{{queryModel}}" path-model="{{pathModel}}" value="{{url}}"></api-url-editor>
+        <api-url-editor required auto-validate base-uri="[[computeFinaleBaseUri(selectedOverrideBase, baseUri)]]" endpoint-path="[[endpointPath]]" query-model="{{queryModel}}" path-model="{{pathModel}}" value="{{url}}"></api-url-editor>
         <h3>API URL params editor</h3>
-        <api-url-params-editor uri-model="{{pathModel}}" query-model="{{queryModel}}"></api-url-params-editor>
+        <api-url-params-editor uri-model="{{pathModel}}" query-model="{{queryModel}}" allow-custom></api-url-params-editor>
         <api-url-data-model
           aware="api-console"
           api-base-uri="{{baseUri}}"
@@ -81,11 +98,6 @@
           query-model="{{queryModel}}"></api-url-data-model>
         <raml-aware raml="{{amfModel}}" scope="api-console"></raml-aware>
         <output><label>Final URL: </label>[[url]]</output>
-        <!--
-        <output><label>Endpoint URI: </label>[[endpointUri]]</output>
-        <output><label>API base parameters:<br/></label>[[_computeApiParams(apiBasePrams)]]</output>
-        <output><label>Selected path view model:<br/></label>[[_computeApiParams(pathModel)]]</output>
-        <output><label>Selected path query model:<br/></label>[[_computeApiParams(queryModel)]]</output> -->
       </section>
     </template>
   </dom-bind>
@@ -140,6 +152,12 @@
           return 'none';
         }
         return JSON.stringify(apiPrams, null, 1);
+      };
+      app.computeFinaleBaseUri = function(selectedOverrideBase, baseUri) {
+        if (selectedOverrideBase) {
+          return selectedOverrideBase;
+        }
+        return baseUri;
       };
       window.addEventListener('WebComponentsReady', () => app._load());
     })(document.getElementById('demo'));

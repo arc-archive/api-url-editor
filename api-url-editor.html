@@ -17,13 +17,6 @@
       @apply --raml-request-url-editor;
     }
 
-    .markdown-body {
-      @apply --arc-font-body1;
-      margin-top: 12px;
-      color: rgba(0, 0, 0, 0.54);
-      @apply --raml-request-url-editor-documentation;
-    }
-
     .paper-input-input {
       @apply --raml-request-url-editor-input;
     }
@@ -48,6 +41,34 @@
 
     label {
       pointer-events: none;
+    }
+
+    .docs {
+      margin-top: 12px;
+      @apply --arc-font-common-base;
+      font-size: 13px !important;
+      font-weight: 200;
+      line-height: 24px;
+      color: var(--inline-documentation-color, rgba(0, 0, 0, 0.87));
+    }
+
+    .markdown-body * {
+      font-size: 13px !important;
+    }
+
+    .markdown-body p:first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .markdown-body p:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    marked-element {
+      background-color: var(--inline-documentation-background-color, #FFF3E0);
+      padding: 4px;
     }
     </style>
     <paper-input-container
@@ -86,15 +107,21 @@
       </template>
     </paper-input-container>
     <template is="dom-if" if="[[documentation]]">
-      <marked-element markdown="[[documentation]]">
-        <div class="markdown-html markdown-body"></div>
-      </marked-element>
+      <div class="docs">
+        <marked-element markdown="[[documentation]]">
+          <div slot="markdown-html" class="markdown-body"></div>
+        </marked-element>
+      </div>
     </template>
   </template>
   <script>
   /**
    * `api-url-editor`
-   * An AMF powered url editor for the HTTP request editor&#34;
+   * An AMF powered url editor for the HTTP request editor.
+   *
+   * The element is regular input element that is adjusted to work with URL
+   * data.
+   * It supports validation for URL values that may contain variables.
    *
    * @customElement
    * @polymer
@@ -177,9 +204,7 @@
 
     static get observers() {
       return [
-        '_computeValueChanged(_fullUri, queryModel.*, pathModel.*)',
-        '_notifyModelChanged(queryModel.*)',
-        '_notifyModelChanged(pathModel.*)'
+        '_computeValueChanged(_fullUri, queryModel.*, pathModel.*)'
       ];
     }
 
@@ -229,6 +254,9 @@
     }
 
     _computeValueChanged(_fullUri, queryRecord, uriRecord) {
+      if (this.__ignoreValueChange) {
+        return;
+      }
       this._computeValue(queryRecord.base, uriRecord.base, _fullUri);
     }
     /**
@@ -278,6 +306,9 @@
      * @return {String} Model value
      */
     _valueFormModelItem(item) {
+      if (item.schema && item.schema.enabled === false) {
+        return;
+      }
       let value = item.value;
       if (!value && item.required) {
         if (value !== 0 && value !== false && value !== null) {
@@ -411,15 +442,15 @@
         .replace(/%20/g, '+');
     }
     /**
-     * Updates URI / query parameters model from on user input.
+     * Updates URI / query parameters model from user input.
      *
      * @param {Event} e Input event
      */
     __userInputHandler(e) {
-      var value = e.target.value;
-      var matches;
-      var uriParams = this.urlParams;
-      var uriRegexp = this.urlSearchRegexp;
+      const value = e.target.value;
+      let matches;
+      const uriParams = this.urlParams;
+      const uriRegexp = this.urlSearchRegexp;
       if (uriParams && uriRegexp) {
         matches = value.match(uriRegexp);
         if (matches) {
@@ -431,20 +462,31 @@
       if (!matches) {
         return;
       }
-      var params = {};
-      matches.forEach(function(item) {
-        var parts = item.split('=');
-        var name = parts[0];
-        if (name in params) {
-          if (!(params[name] instanceof Array)) {
-            params[name] = [params[name]];
-          }
-          params[name].push(parts[1]);
-        } else {
-          params[name] = parts[1];
-        }
-      });
+      const params = {};
+      matches.forEach((item) => this._applyQueryParamToObject(item, params));
       this._applyQueryParamsValues(params);
+    }
+    /**
+     * Applies query parameter values to an object.
+     * Repeated parameters will have array value intead of string value.
+     *
+     * @param {String} param Query parameter value as string. Eg `name=value`
+     * @param {Object} obj Target for values
+     */
+    _applyQueryParamToObject(param, obj) {
+      if (!param || !obj || typeof param !== 'string') {
+        return;
+      }
+      const parts = param.split('=');
+      const name = parts[0];
+      if (name in obj) {
+        if (!(obj[name] instanceof Array)) {
+          obj[name] = [obj[name]];
+        }
+        obj[name].push(parts[1]);
+      } else {
+        obj[name] = parts[1];
+      }
     }
     /**
      * Applies values from the `values` array to the uri parametes which names are in the `names`
@@ -455,19 +497,15 @@
      * @param {Array<String>} names List of variables names (uri parameters).
      */
     _applyUriValues(values, names) {
-      var up = this.pathModel;
-      var len = up.length;
-      names.forEach(function(item, index) {
-        for (var i = 0; i < len; i++) {
-          if (up[i].name === item) {
-            this.fire('uri-parameter-changed', {
-              name: up[i].name,
-              value: values[index]
-            });
-            break;
-          }
+      for (let i = 0, len = names.length; i < len; i++) {
+        const name = names[i];
+        const index = this._findModelIndex(name, 'path');
+        if (index !== -1) {
+          this.__ignoreValueChange = true;
+          this.set(['pathModel', index, 'value'], values[i]);
+          this.__ignoreValueChange = false;
         }
-      }, this);
+      }
     }
     /**
      * Applies query parameters values to the render list.
@@ -476,19 +514,22 @@
      * `queryModel` list
      */
     _applyQueryParamsValues(map) {
-      var qp = this.queryModel;
-      var len = qp.length;
-      for (var _key in map) {
-        for (var i = 0; i < len; i++) {
-          if (qp[i].name === _key) {
-            this.fire('query-parameter-changed', {
-              name: qp[i].name,
-              value: map[_key]
-            });
-            break;
-          }
+      for (let name in map) {
+        const index = this._findModelIndex(name, 'query');
+        if (index !== -1) {
+          this.__ignoreValueChange = true;
+          this.set(['queryModel', index, 'value'], map[name]);
+          this.__ignoreValueChange = false;
         }
       }
+    }
+
+    _findModelIndex(name, type) {
+      const model = this[type + 'Model'];
+      if (!model) {
+        return -1;
+      }
+      return model.findIndex((item) => item.name === name);
     }
     /**
      * A handler that is called on input
@@ -507,13 +548,13 @@
       if (this.skipDocs) {
         return;
       }
-      var up = this.pathModel;
+      const up = this.pathModel;
       if (!id || !up) {
         this.documentation = '';
         return;
       }
-      var item;
-      for (var i = 0, len = up.length; i < len; i++) {
+      let item;
+      for (let i = 0, len = up.length; i < len; i++) {
         if (up[i].name === id) {
           item = up[i];
           break;
@@ -525,8 +566,10 @@
       }
       this.documentation = item.description;
     }
+
     _onElementBlur() {
       this.documentation = '';
+      this._handleAutoValidate();
     }
     /**
      * A handler for the `url-value-changed` event.
@@ -539,6 +582,7 @@
       }
       this.set('value', e.detail.value);
     }
+
     _getValidity() {
       const value = this.value;
       if (!this.required && !value) {
@@ -563,7 +607,10 @@
     }
     // Handler for input click / tap.
     _inputTap() {
-      var variable = this._getSelectedVariable();
+      if (this.skipDocs) {
+        return;
+      }
+      const variable = this._getSelectedVariable();
       this._displayVariableDoc(variable);
     }
     /**
@@ -666,35 +713,6 @@
         paramsNames = paramsNames.map((item) => item.substr(1, item.length - 2));
       }
       return paramsNames;
-    }
-    /**
-     * Dispatches `quri/query-parameter-changed` custom event when a change in
-     * the model value has been detected.
-     *
-     * @param {[type]} record [description]
-     * @return {[type]} [description]
-     */
-    _notifyModelChanged(record) {
-      if (!record) {
-        return;
-      }
-      if (record.path === 'queryModel' || record.path === 'pathModel') {
-        return;
-      }
-      if (record.path.indexOf('value') < 2) {
-        return;
-      }
-      const item = record.path.substr(0, record.path.lastIndexOf('.'));
-      if (!item) {
-        console.warn('Unable to notify parameter change. Unknown path', record.path);
-        return;
-      }
-      const type = record.path.substr(0, record.path.indexOf('.'));
-      const formType = type === 'queryModel' ? 'query' : 'uri';
-      this.fire(formType + '-parameter-changed', {
-        name: item.name,
-        value: item.value
-      });
     }
 
     fire(type, detail, options) {
