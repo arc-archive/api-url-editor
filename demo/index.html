@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>api-url-editor demo</title>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="../../paper-item/paper-item.html">
+    <link rel="import" href="../../paper-listbox/paper-listbox.html">
+    <link rel="import" href="../../raml-aware/raml-aware.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../api-url-data-model/api-url-data-model.html">
+    <link rel="import" href="../../neon-animation/web-animations.html">
+    <link rel="import" href="../api-url-editor.html">
+    <link rel="import" href="../../api-url-params-editor/api-url-params-editor.html">
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        padding: 12px 24px;
+        background-color: #C5E1A5;
+        --iron-icon-fill-color: #3E2723;
+        --paper-input-container-focus-color: #33691E;
+        --paper-input-container-label: {
+          color: #3E2723;
+        };
+      }
+
+      output {
+        display: block;
+        margin-bottom: 24px;
+        white-space: pre-wrap;
+        @apply --paper-font-code1;
+      }
+
+      .main {
+        margin-top: 40px;
+        @apply --shadow-elevation-4dp;
+        padding: 24px;
+        margin-bottom: 40px;
+      }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-bind id="demo">
+    <template is="dom-bind">
+      <header>
+        <paper-dropdown-menu label="Select demo endpoint">
+          <paper-listbox slot="dropdown-content" id="enpointsList" on-selected-changed="_endpointChanged">
+            <template is="dom-repeat" items="[[endpoints]]">
+              <paper-item>[[item]]</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <paper-dropdown-menu label="Select endpoint's method">
+          <paper-listbox slot="dropdown-content" id="operationsList" selected="{{selectedShape}}" attr-for-selected="data-id">
+            <template is="dom-repeat" items="[[operations]]">
+              <paper-item data-id$="[[item.id]]">[[item.label]]</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </header>
+      <section role="main" class="vertical-section-container centered main">
+        <api-url-editor base-uri="[[baseUri]]" endpoint-path="[[endpointPath]]" query-model="{{queryModel}}" path-model="{{pathModel}}" value="{{url}}"></api-url-editor>
+        <h3>API URL params editor</h3>
+        <api-url-params-editor uri-model="{{pathModel}}" query-model="{{queryModel}}"></api-url-params-editor>
+        <api-url-data-model
+          aware="api-console"
+          api-base-uri="{{baseUri}}"
+          endpoint-path="{{endpointPath}}"
+          selected="{{selectedShape}}"
+          path-model="{{pathModel}}"
+          query-model="{{queryModel}}"></api-url-data-model>
+        <raml-aware raml="{{amfModel}}" scope="api-console"></raml-aware>
+        <output><label>Final URL: </label>[[url]]</output>
+        <!--
+        <output><label>Endpoint URI: </label>[[endpointUri]]</output>
+        <output><label>API base parameters:<br/></label>[[_computeApiParams(apiBasePrams)]]</output>
+        <output><label>Selected path view model:<br/></label>[[_computeApiParams(pathModel)]]</output>
+        <output><label>Selected path query model:<br/></label>[[_computeApiParams(queryModel)]]</output> -->
+      </section>
+    </template>
+  </dom-bind>
+  <script>
+    (function(app) {
+      app._load = function() {
+        fetch('./amf-model.json')
+          .then((response) => response.json())
+          .then((data) => {
+            app.amfModel = data;
+            app._setEndpointsList(data);
+          });
+      };
+      app._getAmfValue = function(model) {
+        if (!model || !(model instanceof Array) || !model[0]) {
+          return;
+        }
+        return model[0]['@value'];
+      };
+      app._setEndpointsList = function(data) {
+        data = data[0]['http://raml.org/vocabularies/document#encodes'][0];
+        const endpoints = data['http://raml.org/vocabularies/http#endpoint'];
+        const list = endpoints.map((item) => {
+          return app._getAmfValue(item['http://raml.org/vocabularies/http#path']);
+        });
+        app.endpoints = list;
+      };
+      app._endpointChanged = function(e) {
+        const index = e.detail.value;
+        app._computeOperations(index);
+      };
+      app._computeOperations = function(index) {
+        let data = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
+        data = data['http://raml.org/vocabularies/http#endpoint'][index];
+        const operations = data['http://www.w3.org/ns/hydra/core#supportedOperation'];
+        if (!operations) {
+          app.selectedShape = data['@id'];
+          return;
+        }
+        const list = operations.map((item) => {
+          return {
+            id: item['@id'],
+            label: app._getAmfValue(item['http://www.w3.org/ns/hydra/core#method'])
+          };
+        });
+        app.selectedShape = undefined;
+        app.operations = list;
+        app.selectedShape = data['@id'];
+      };
+      app._computeApiParams = function(apiPrams) {
+        if (!apiPrams) {
+          return 'none';
+        }
+        return JSON.stringify(apiPrams, null, 1);
+      };
+      window.addEventListener('WebComponentsReady', () => app._load());
+    })(document.getElementById('demo'));
+  </script>
+  </body>
+</html>
