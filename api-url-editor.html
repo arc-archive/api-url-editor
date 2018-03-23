@@ -535,7 +535,7 @@
      * A handler that is called on input
      */
     _onValueChanged() {
-      if (!this._elementReady) {
+      if (!this._elementReady || this.__cancelValueChange) {
         return;
       }
       this.fire('url-value-changed', {
@@ -580,7 +580,9 @@
       if (e.target === this) {
         return;
       }
+      this.__cancelValueChange = true;
       this.set('value', e.detail.value);
+      this.__cancelValueChange = false;
     }
 
     _getValidity() {

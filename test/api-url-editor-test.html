@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>api-url-editor test</title>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="../api-url-editor.html">
+  </head>
+  <body>
+
+    <test-fixture id="Basic">
+      <template>
+        <api-url-editor></api-url-editor>
+      </template>
+    </test-fixture>
+
+    <script>
+      /* global sinon */
+      const BASE_URI = 'https://{base}.domain.com';
+      suite('Basic computations', () => {
+        let element;
+        const TEST_PATH = '/test/{path}/value/{param}';
+        suiteSetup(() => {
+          element = fixture('Basic');
+          element.baseUri = BASE_URI;
+          element.endpointPath = TEST_PATH;
+        });
+
+        test('Computes _fullUrl', () => {
+          assert.equal(element._fullUri, BASE_URI + TEST_PATH);
+        });
+
+        test('urlParams is computed', () => {
+          assert.typeOf(element.urlParams, 'array');
+          assert.lengthOf(element.urlParams, 3);
+        });
+
+        test('urlParams contains all path parameters', () => {
+          assert.equal(element.urlParams[0], 'base');
+          assert.equal(element.urlParams[1], 'path');
+          assert.equal(element.urlParams[2], 'param');
+        });
+
+        test('urlSearchRegexp is computed', () => {
+          assert.ok(element.urlSearchRegexp);
+        });
+      });
+
+      suite('Array values', () => {
+        let element;
+        let querylModel;
+        const TEST_PATH = '/path/{var}';
+        setup(() => {
+          element = fixture('Basic');
+          element.baseUri = BASE_URI;
+          element.endpointPath = TEST_PATH;
+          querylModel = [{
+            value: 'test',
+            name: 'test',
+            required: true,
+            schema: {}
+          }, {
+            value: ['test'],
+            name: 'arrayParameter',
+            required: true,
+            schema: {}
+          }];
+        });
+
+        test('Produces URL with single array value', () => {
+          element.set('queryModel', querylModel);
+          const match = element.value.match(/&arrayParameter=/g);
+          assert.equal(match.length, 1);
+        });
+
+        test('Element produces URL with array values', () => {
+          querylModel[1].value.push('test2');
+          element.set('queryModel', querylModel);
+          const match = element.value.match(/&arrayParameter=/g);
+          assert.equal(match.length, 2);
+        });
+      });
+
+      suite('Dispatches events', () => {
+        let element;
+        let querylModel;
+        const TEST_PATH = '/path/{var}';
+        setup(() => {
+          element = fixture('Basic');
+          element.baseUri = BASE_URI;
+          element.endpointPath = TEST_PATH;
+          querylModel = [{
+            value: 'test',
+            name: 'value',
+            required: true,
+            schema: {}
+          }];
+        });
+
+        test('Dispatches url-value-changed custom event', () => {
+          var spy = sinon.stub();
+          element.addEventListener('url-value-changed', spy);
+          element.value = URL;
+          assert.isTrue(spy.calledOnce);
+        });
+
+        test('Dispatches url-value-changed event when query parameter change', () => {
+          var spy = sinon.stub();
+          element.addEventListener('url-value-changed', spy);
+          element.set('queryModel', querylModel);
+          assert.isTrue(spy.calledOnce);
+        });
+
+        test('Event contains declared properties', (done) => {
+          element.addEventListener('url-value-changed', (e) => {
+            assert.equal(e.detail.value, 'https://{base}.domain.com/path/{var}?value=test');
+            done();
+          });
+          element.set('queryModel', querylModel);
+        });
+      });
+
+      suite('Handles events', () => {
+        let element;
+        setup(() => {
+          element = fixture('Basic');
+        });
+
+        function fire(url) {
+          document.dispatchEvent(new CustomEvent('url-value-changed', {
+            bubbles: true,
+            detail: {
+              value: url
+            }
+          }));
+        }
+
+        test('Updates value from the event', () => {
+          const url = 'https://domain.com/';
+          fire(url);
+          assert.equal(element.value, url);
+        });
+
+        test('Does not redispatch the event', () => {
+          const url = 'https://domain.com/path';
+          var spy = sinon.stub();
+          element.addEventListener('url-value-changed', spy);
+          fire(url);
+          assert.isFalse(spy.called);
+        });
+      });
+    </script>
+
+  </body>
+</html>
