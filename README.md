@@ -11,6 +11,20 @@ data model.
 
 This component replaces `advanced-rest-client/raml-request-url-editor` that can only work with RAML data.
 
+<!---
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="api-url-editor.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<api-url-editor></api-url-editor>
+```
+
 ### API components
 
 This components is a part of API components ecosystem: https://elements.advancedrestclient.com/
