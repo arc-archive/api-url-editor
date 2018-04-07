@@ -14,29 +14,12 @@
     :host {
       outline: none;
       display: block;
-      @apply --raml-request-url-editor;
-    }
-
-    .paper-input-input {
-      @apply --raml-request-url-editor-input;
+      @apply --api-url-editor;
     }
 
     input {
-      position: relative; /* to make a stacking context */
-      outline: none;
-      box-shadow: none;
-      padding: 0;
-      width: 100%;
-      max-width: 100%;
-      background: transparent;
-      border: none;
-      color: var(--paper-input-container-input-color, var(--primary-text-color));
-      -webkit-appearance: none;
-      text-align: inherit;
-      vertical-align: bottom;
-      min-width: 0;
-      @apply --paper-font-subhead;
-      @apply --paper-input-container-input;
+      @apply --paper-input-container-shared-input-style;
+      @apply --paper-input-container-input-input-style;
     }
 
     label {
@@ -78,7 +61,11 @@
       disabled$="[[disabled]]"
       invalid="[[invalid]]">
       <label hidden$="[[!label]]" slot="label">[[label]]</label>
-      <iron-input bind-value="{{value}}" slot="input" invalid="{{invalid}}">
+      <iron-input
+        id$="[[_inputId]]"
+        bind-value="{{value}}"
+        slot="input"
+        invalid="{{invalid}}">
         <input
           aria-labelledby$="[[_ariaLabelledBy]]"
           aria-describedby$="[[_ariaDescribedBy]]"
@@ -102,8 +89,8 @@
           tabindex$="[[tabIndex]]"
           autosave$="[[autosave]]">
       </iron-input>
-      <template is="dom-if" if="[[errorMessage]]">
-        <paper-input-error slot="add-on">[[errorMessage]]</paper-input-error>
+      <template is="dom-if" if="[[invalid]]">
+        <paper-input-error slot="add-on" invalid>[[errorMessage]]</paper-input-error>
       </template>
     </paper-input-container>
     <template is="dom-if" if="[[documentation]]">
@@ -115,6 +102,22 @@
     </template>
   </template>
   <script>
+  const _inputBehavior2 = !(Polymer.PaperInputBehavior instanceof Array);
+  const _behaviorsQueue = [];
+  let _base = ArcBehaviors.EventsTargetBehavior(Polymer.Element);
+  if (_inputBehavior2) {
+    // API console with Anypoint styling has its own implementation of
+    // paper input behavior which is for Polymer 2 only.
+    _base = Polymer.PaperInputBehavior(_base);
+  } else {
+    _behaviorsQueue.push(Polymer.PaperInputBehavior);
+  }
+  if (!Polymer.IronValidatableMixin) {
+    _behaviorsQueue.push(Polymer.IronValidatableBehavior);
+  } else {
+    _base = Polymer.IronValidatableMixin(_base);
+  }
+  _base = Polymer.mixinBehaviors(_behaviorsQueue, _base);
   /**
    * `api-url-editor`
    * An AMF powered url editor for the HTTP request editor.
@@ -130,7 +133,7 @@
    * @appliesMixin Polymer.IronValidatableBehavior
    * @appliesMixin ArcBehaviors.EventsTargetBehavior
    */
-  class ApiUrlEditor extends Polymer.mixinBehaviors([Polymer.PaperInputBehavior, Polymer.IronValidatableBehavior], ArcBehaviors.EventsTargetBehavior(Polymer.Element)) {
+  class ApiUrlEditor extends _base {
     static get is() { return 'api-url-editor';}
     static get properties() {
       return {
