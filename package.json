@@ -8,7 +8,8 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.1.1"
+    "@polymer/gen-typescript-declarations": "^1.1.1",
+    "amf-client-js": "^1.4.0-30"
   },
   "private": false,
   "scripts": {
