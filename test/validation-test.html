@@ -94,10 +94,6 @@
       flush(() => done());
     });
 
-    test('Valid for empty initial value', () => {
-      assert.isFalse(input.invalid);
-    });
-
     test('Valid for valid value', () => {
       input.value = 'https://domain.com?a=b&param=value#1232344';
       assert.isFalse(input.invalid);
