@@ -1,6 +1,6 @@
 {
   "name": "@api-components/api-url-editor",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "license": "Apache-2.0",
   "description": "An AMF powered url editor for the HTTP request editor",
   "authors": [
@@ -9,7 +9,7 @@
   ],
   "devDependencies": {
     "@polymer/gen-typescript-declarations": "^1.1.1",
-    "amf-client-js": "^1.4.0-30"
+    "amf-client-js": "^1.5.0"
   },
   "private": false,
   "scripts": {

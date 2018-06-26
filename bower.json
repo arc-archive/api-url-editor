@@ -1,7 +1,7 @@
 {
   "name": "api-url-editor",
   "description": "An AMF powered url editor for the HTTP request editor",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "license": "Apache-2.0",
   "authors": [
     "Pawel Psztyc",
@@ -26,7 +26,7 @@
     "paper-item": "PolymerElements/paper-item#^2.1.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.1.0",
     "web-animations-js": "web-animations/web-animations-js#^2.2.0",
-    "api-url-data-model": "advanced-rest-client/api-url-data-model#^2.0.0",
+    "api-url-data-model": "advanced-rest-client/api-url-data-model#^2.0.1",
     "api-url-params-editor": "advanced-rest-client/api-url-params-editor#^2.0.0"
   },
   "repository": {
