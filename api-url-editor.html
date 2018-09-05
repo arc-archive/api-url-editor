@@ -3,8 +3,6 @@
 <link rel="import" href="../paper-input/paper-input-behavior.html">
 <link rel="import" href="../paper-input/paper-input-error.html">
 <link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
-<link rel="import" href="../marked-element/marked-element.html">
-<link rel="import" href="../markdown-styles/markdown-styles.html">
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../events-target-behavior/events-target-behavior.html">
 <dom-module id="api-url-editor">
@@ -26,15 +24,6 @@
       pointer-events: none;
     }
 
-    .docs {
-      margin-top: 12px;
-      @apply --arc-font-common-base;
-      font-size: 13px !important;
-      font-weight: 200;
-      line-height: 24px;
-      color: var(--inline-documentation-color, rgba(0, 0, 0, 0.87));
-    }
-
     .markdown-body * {
       font-size: 13px !important;
     }
@@ -47,11 +36,6 @@
     .markdown-body p:last-child {
       margin-bottom: 0;
       padding-bottom: 0;
-    }
-
-    marked-element {
-      background-color: var(--inline-documentation-background-color, #FFF3E0);
-      padding: 4px;
     }
     </style>
     <paper-input-container
@@ -83,7 +67,6 @@
           autocapitalize$="[[autocapitalize]]"
           autocorrect$="[[autocorrect]]"
           on-change="_onChange"
-          on-tap="_inputTap"
           on-blur="_onElementBlur"
           on-input="__userInputHandler"
           tabindex$="[[tabIndex]]"
@@ -93,13 +76,6 @@
         <paper-input-error slot="add-on" invalid>[[errorMessage]]</paper-input-error>
       </template>
     </paper-input-container>
-    <template is="dom-if" if="[[documentation]]">
-      <div class="docs">
-        <marked-element markdown="[[documentation]]">
-          <div slot="markdown-html" class="markdown-body"></div>
-        </marked-element>
-      </div>
-    </template>
   </template>
   <script>
   const _inputBehavior2 = !(Polymer.PaperInputBehavior instanceof Array);
@@ -156,10 +132,6 @@
           type: String,
           value: 'Fill the URI parameters before making a request'
         },
-        // A documentation to show.
-        documentation: String,
-        // If true it will not display documentation for the variable (if available).
-        skipDocs: Boolean,
         /**
          * Value or RAML's base URI property.
          *
@@ -180,13 +152,17 @@
          * Computed query properties model.
          * Use `api-url-data-model` to compute model for the view.
          */
-        queryModel: Array,
+        queryModel: {
+          type: Array,
+          notify: true
+        },
         /**
          * Computed URI properties model.
          * Use `api-url-data-model` to compute model for the view.
          */
         pathModel: {
-          type: Array
+          type: Array,
+          notify: true
         },
         /**
          * Computed, ordered list of URL variables in the URI string.
@@ -462,12 +438,12 @@
           this._applyUriValues(matches, uriParams);
         }
       }
-      matches = value.match(/[^&?]*?=[^&?]*/g);
-      if (!matches) {
+      const matchesNew = value.match(/[^&?]*?=[^&?]*/g);
+      if (!matchesNew) {
         return;
       }
       const params = {};
-      matches.forEach((item) => this._applyQueryParamToObject(item, params));
+      matchesNew.forEach((item) => this._applyQueryParamToObject(item, params));
       this._applyQueryParamsValues(params);
     }
     /**
@@ -547,32 +523,8 @@
       });
       this._handleAutoValidate();
     }
-    // Displays the doc for the variable.
-    _displayVariableDoc(id) {
-      if (this.skipDocs) {
-        return;
-      }
-      const up = this.pathModel;
-      if (!id || !up) {
-        this.documentation = '';
-        return;
-      }
-      let item;
-      for (let i = 0, len = up.length; i < len; i++) {
-        if (up[i].name === id) {
-          item = up[i];
-          break;
-        }
-      }
-      if (!item || !item.description) {
-        this.documentation = '';
-        return;
-      }
-      this.documentation = item.description;
-    }
 
     _onElementBlur() {
-      this.documentation = '';
       this._handleAutoValidate();
     }
     /**
@@ -581,7 +533,7 @@
      * It's to be used besides the Polymer's data binding system.
      */
     _extValueChangedHandler(e) {
-      if (e.target === this) {
+      if (e.target === e.composedPath()[0]) {
         return;
       }
       this.__cancelValueChange = true;
@@ -610,75 +562,6 @@
         return true;
       }
       return this.shadowRoot.querySelector('input').validity.valid;
-    }
-    // Handler for input click / tap.
-    _inputTap() {
-      if (this.skipDocs) {
-        return;
-      }
-      const variable = this._getSelectedVariable();
-      this._displayVariableDoc(variable);
-    }
-    /**
-     * Returns variable name for current caret position.
-     * This can be used for mouse on keyboard events to determine
-     * if current action involve a variable.
-     * It takes a selection start as a orientation point to find a variable.
-     *
-     * @return {String|undefined} Variable name or undefined if at current
-     * position there's no variable.
-     */
-    _getSelectedVariable() {
-      const start = this.shadowRoot.querySelector('input').selectionStart;
-      const variable = this._computeVariableFromPosition(start);
-      return variable;
-    }
-    /**
-     * Computes variable from current caret position.
-     * It looks for brackets to the left and right from the selection and
-     * everything between is a variable name.
-     *
-     * @param {Number} start Caret position in thex field.
-     * @return {String|undefined} Variable name or undefined if at current
-     * position there's no variable.
-     */
-    _computeVariableFromPosition(start) {
-      const value = this.value;
-      if (!start || !value) {
-        return;
-      }
-      // Check existance of the left bracket "{".
-      let pos;
-      let leftBracketPos = -1;
-      for (pos = start; pos > 0; pos--) {
-        if (value[pos] === '}') {
-          break;
-        }
-        if (value[pos] === '{') {
-          leftBracketPos = pos;
-          break;
-        }
-      }
-      if (leftBracketPos === -1) {
-        // Click is not in the vartiable.
-        return;
-      }
-      let rightBracketPos = -1;
-      for (pos = leftBracketPos; pos < value.length; pos++) {
-        const _val = value[pos];
-        if (_val === '}') {
-          rightBracketPos = pos;
-          break;
-        } else if (_val === '.' || _val === '/') {
-          break;
-        }
-      }
-      if (rightBracketPos === -1) {
-        return;
-      }
-      const variable = value.substr(leftBracketPos + 1,
-        rightBracketPos - leftBracketPos - 1);
-      return variable;
     }
     /**
      * Creates a regular expression from the `_fullUri` to match the
