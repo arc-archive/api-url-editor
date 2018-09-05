@@ -12,8 +12,6 @@
     "polymer": "Polymer/polymer#^2.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.3",
     "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior#^2.1.0",
-    "marked-element": "PolymerElements/marked-element#^2.4.0",
-    "markdown-styles": "advanced-rest-client/markdown-styles#^2.0.2",
     "paper-input": "PolymerElements/paper-input#^2.2.0",
     "events-target-behavior": "advanced-rest-client/events-target-behavior#^2.0.1"
   },
@@ -27,7 +25,9 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.1.0",
     "web-animations-js": "web-animations/web-animations-js#^2.2.0",
     "api-url-data-model": "advanced-rest-client/api-url-data-model#^2.0.1",
-    "api-url-params-editor": "advanced-rest-client/api-url-params-editor#^2.0.0"
+    "api-url-params-editor": "advanced-rest-client/api-url-params-editor#^2.0.0",
+    "api-navigation": "advanced-rest-client/api-navigation#^2.0.0",
+    "arc-electron-default-theme": "advanced-rest-client/arc-electron-default-theme#2.0.0-preview"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,3065 @@
+{
+  "@context": {
+    "raml-http": "http://a.ml/vocabularies/http#",
+    "shacl": "http://www.w3.org/ns/shacl#",
+    "raml-shapes": "http://a.ml/vocabularies/shapes#",
+    "security": "http://a.ml/vocabularies/security#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "data": "http://a.ml/vocabularies/data#",
+    "doc": "http://a.ml/vocabularies/document#",
+    "schema-org": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#"
+  },
+  "@id": "amf://id",
+  "@type": [
+    "doc:Document",
+    "doc:Fragment",
+    "doc:Module",
+    "doc:Unit"
+  ],
+  "doc:declares": [
+    {
+      "@id": "amf://id#1",
+      "@type": [
+        "doc:Trait",
+        "doc:AbstractDeclaration",
+        "doc:DomainElement"
+      ],
+      "doc:dataNode": {
+        "@id": "amf://id#2",
+        "@type": "data:Object",
+        "data:queryParameters": {
+          "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2",
+          "@type": "data:Object",
+          "data:limit": {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3",
+            "@type": "data:Object",
+            "data:default": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_9",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:integer",
+                "@value": "25"
+              }
+            },
+            "data:description": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_5",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "Limit in the response list"
+              }
+            },
+            "data:example": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_8",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:integer",
+                "@value": "100"
+              }
+            },
+            "data:maximum": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_6",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:integer",
+                "@value": "300"
+              }
+            },
+            "data:minimum": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_7",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:integer",
+                "@value": "1"
+              }
+            },
+            "data:type": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_4",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "number"
+              }
+            }
+          },
+          "data:nextPageToken": {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16",
+            "@type": "data:Object",
+            "data:description": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_19",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+              }
+            },
+            "data:displayName": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_21",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "Page token"
+              }
+            },
+            "data:example": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_18",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+              }
+            },
+            "data:pattern": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_20",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "[a-zA-Z0-9]+"
+              }
+            },
+            "data:type": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_17",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "string"
+              }
+            }
+          },
+          "data:start": {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10",
+            "@type": "data:Object",
+            "data:default": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_15",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:integer",
+                "@value": "0"
+              }
+            },
+            "data:description": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_12",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "The start entry of the list"
+              }
+            },
+            "data:example": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_14",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:integer",
+                "@value": "25"
+              }
+            },
+            "data:minimum": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_13",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:integer",
+                "@value": "0"
+              }
+            },
+            "data:type": {
+              "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_11",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "number"
+              }
+            }
+          }
+        }
+      },
+      "schema-org:name": "paginated"
+    },
+    {
+      "@id": "amf://id#6",
+      "@type": [
+        "security:SecurityScheme",
+        "doc:DomainElement"
+      ],
+      "raml-http:header": {
+        "@id": "amf://id#7",
+        "@type": [
+          "raml-http:Parameter",
+          "doc:DomainElement"
+        ],
+        "raml-http:binding": "header",
+        "raml-http:paramName": "SpecialToken",
+        "raml-http:schema": {
+          "@id": "amf://id#8",
+          "@type": [
+            "raml-shapes:ScalarShape",
+            "shacl:Shape",
+            "raml-shapes:Shape",
+            "doc:DomainElement"
+          ],
+          "schema-org:description": "Used to send a custom token.\n",
+          "shacl:datatype": {
+            "@id": "xsd:string"
+          },
+          "shacl:name": "schema"
+        },
+        "schema-org:description": "Used to send a custom token.\n",
+        "schema-org:name": "SpecialToken",
+        "hydra:required": true
+      },
+      "raml-http:parameter": [
+        {
+          "@id": "amf://id#9",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "query",
+          "raml-http:paramName": "debugToken",
+          "raml-http:schema": {
+            "@id": "amf://id#10",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:in": {
+              "@id": "amf://id#10/list",
+              "@type": "rdfs:Seq",
+              "rdfs:_1": {
+                "@id": "amf://id#11",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Info"
+                }
+              },
+              "rdfs:_2": {
+                "@id": "amf://id#12",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Log"
+                }
+              },
+              "rdfs:_3": {
+                "@id": "amf://id#13",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Warning"
+                }
+              },
+              "rdfs:_4": {
+                "@id": "amf://id#14",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Error"
+                }
+              },
+              "rdfs:_5": {
+                "@id": "amf://id#15",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Critical"
+                }
+              }
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+          "schema-org:name": "debugToken",
+          "hydra:required": false
+        },
+        {
+          "@id": "amf://id#16",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "query",
+          "raml-http:paramName": "booleanToken",
+          "raml-http:schema": {
+            "@id": "amf://id#17",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Just to test boolean values.",
+            "shacl:datatype": {
+              "@id": "xsd:boolean"
+            },
+            "shacl:defaultValue": {
+              "@id": "amf://id#18",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:boolean",
+                "@value": "true"
+              }
+            },
+            "shacl:defaultValueStr": "true",
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "Just to test boolean values.",
+          "schema-org:name": "booleanToken",
+          "hydra:required": true
+        }
+      ],
+      "security:name": "x1",
+      "security:type": "x-custom",
+      "schema-org:description": "A custom security scheme for authenticating requests.\nIt allows to set `SpecialToken` header from the authorization panel.\nThe same header should be rendered in the headers editor with console using\nRAML JS parser.\nWith `AMF` console this is separated information.\nThis scheme also sets `debugToken` and `booleanToken` query parameters.\nBoth are enums, however `booleanToken` can only have `true` and `false`\nvalues.\n",
+      "hydra:response": [
+        {
+          "@id": "amf://id#19",
+          "@type": [
+            "raml-http:Response",
+            "doc:DomainElement"
+          ],
+          "schema-org:description": "Bad token.\n",
+          "schema-org:name": "401",
+          "hydra:statusCode": "401"
+        },
+        {
+          "@id": "amf://id#20",
+          "@type": [
+            "raml-http:Response",
+            "doc:DomainElement"
+          ],
+          "schema-org:name": "403",
+          "hydra:statusCode": "403"
+        }
+      ]
+    },
+    {
+      "@id": "amf://id#22",
+      "@type": [
+        "security:SecurityScheme",
+        "doc:DomainElement"
+      ],
+      "raml-http:parameter": [
+        {
+          "@id": "amf://id#23",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "query",
+          "raml-http:paramName": "apiUserId",
+          "raml-http:schema": {
+            "@id": "amf://id#24",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Your api user ID. Some imaginary value.\n",
+            "shacl:datatype": {
+              "@id": "raml-shapes:number"
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "Your api user ID. Some imaginary value.\n",
+          "schema-org:name": "apiUserId",
+          "hydra:required": true
+        },
+        {
+          "@id": "amf://id#25",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "query",
+          "raml-http:paramName": "apiNonce",
+          "raml-http:schema": {
+            "@id": "amf://id#26",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Random string",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "Random string",
+          "schema-org:name": "apiNonce",
+          "hydra:required": true
+        }
+      ],
+      "security:name": "x2",
+      "security:type": "x-custom",
+      "schema-org:description": "Other custom security method for authorization.\n",
+      "hydra:response": {
+        "@id": "amf://id#27",
+        "@type": [
+          "raml-http:Response",
+          "doc:DomainElement"
+        ],
+        "raml-http:payload": {
+          "@id": "amf://id#28",
+          "@type": [
+            "raml-http:Payload",
+            "doc:DomainElement"
+          ],
+          "raml-http:mediaType": "application/json",
+          "raml-http:schema": {
+            "@id": "amf://id#29",
+            "@type": [
+              "shacl:NodeShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "shacl:closed": false,
+            "shacl:name": "schema",
+            "shacl:property": [
+              {
+                "@id": "amf://id#30",
+                "@type": [
+                  "shacl:PropertyShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "raml-shapes:range": {
+                  "@id": "amf://id#31",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "Always true. Indicates that the response is errord.",
+                  "shacl:datatype": {
+                    "@id": "xsd:boolean"
+                  },
+                  "shacl:name": "error"
+                },
+                "shacl:minCount": 1,
+                "shacl:name": "error",
+                "shacl:path": {
+                  "@id": "data:error"
+                }
+              },
+              {
+                "@id": "amf://id#32",
+                "@type": [
+                  "shacl:PropertyShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "raml-shapes:range": {
+                  "@id": "amf://id#33",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "Human readable message describing the error.",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "message"
+                },
+                "shacl:minCount": 1,
+                "shacl:name": "message",
+                "shacl:path": {
+                  "@id": "data:message"
+                }
+              }
+            ]
+          }
+        },
+        "schema-org:description": "Bad token autorization.\n",
+        "schema-org:name": "401",
+        "hydra:statusCode": "401"
+      }
+    },
+    {
+      "@id": "amf://id#51",
+      "@type": [
+        "raml-shapes:ArrayShape",
+        "shacl:Shape",
+        "raml-shapes:Shape",
+        "doc:DomainElement"
+      ],
+      "raml-shapes:items": {
+        "@id": "amf://id#52",
+        "@type": [
+          "raml-shapes:ScalarShape",
+          "shacl:Shape",
+          "raml-shapes:Shape",
+          "doc:DomainElement"
+        ],
+        "shacl:datatype": {
+          "@id": "xsd:string"
+        }
+      },
+      "shacl:name": "amf_inline_type_1"
+    }
+  ],
+  "doc:encodes": {
+    "@id": "amf://id#37",
+    "@type": [
+      "schema-org:WebAPI",
+      "doc:RootDomainElement",
+      "doc:DomainElement"
+    ],
+    "raml-http:endpoint": [
+      {
+        "@id": "amf://id#38",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/simple",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#39",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "hydra:expects": {
+            "@id": "amf://id#40",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:parameter": [
+              {
+                "@id": "amf://id#41",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "paramString",
+                "raml-http:schema": {
+                  "@id": "amf://id#42",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:name": "String value",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema"
+                },
+                "schema-org:name": "paramString",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#43",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "param_number",
+                "raml-http:schema": {
+                  "@id": "amf://id#44",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:maxInclusive": 100,
+                  "shacl:minInclusive": 20,
+                  "shacl:name": "schema"
+                },
+                "schema-org:name": "param_number",
+                "hydra:required": true
+              }
+            ]
+          },
+          "hydra:method": "get"
+        }
+      },
+      {
+        "@id": "amf://id#45",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:parameter": {
+          "@id": "amf://id#53",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "path",
+          "raml-http:paramName": "pathParam",
+          "raml-http:schema": {
+            "@id": "amf://id#54",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "This is test description with `markup`.\nThis value can be one of:\n- `value1`\n- `value2`\n- `value3`\n",
+            "schema-org:name": "Path parameter",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:in": {
+              "@id": "amf://id#54/list",
+              "@type": "rdfs:Seq",
+              "rdfs:_1": {
+                "@id": "amf://id#55",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "value1"
+                }
+              },
+              "rdfs:_2": {
+                "@id": "amf://id#56",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "value2"
+                }
+              },
+              "rdfs:_3": {
+                "@id": "amf://id#57",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "value3"
+                }
+              }
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "This is test description with `markup`.\nThis value can be one of:\n- `value1`\n- `value2`\n- `value3`\n",
+          "schema-org:name": "pathParam",
+          "hydra:required": true
+        },
+        "raml-http:path": "/simple/{pathParam}",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#46",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "hydra:expects": {
+            "@id": "amf://id#47",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:parameter": [
+              {
+                "@id": "amf://id#48",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "limit",
+                "raml-http:schema": {
+                  "@id": "amf://id#49",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:name": "schema"
+                },
+                "schema-org:name": "limit",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#50",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "items",
+                "raml-http:schema": {
+                  "@id": "amf://id#51/linked_1",
+                  "@type": [
+                    "raml-shapes:ArrayShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:link-label": "amf_inline_type_1",
+                  "doc:link-target": {
+                    "@id": "amf://id#51"
+                  }
+                },
+                "schema-org:name": "items",
+                "hydra:required": true
+              }
+            ]
+          },
+          "hydra:method": "get"
+        }
+      },
+      {
+        "@id": "amf://id#58",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/traits",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#59",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "doc:extends": {
+            "@id": "amf://id#60",
+            "@type": [
+              "doc:ParametrizedTrait",
+              "doc:ParametrizedDeclaration",
+              "doc:DomainElement"
+            ],
+            "doc:target": {
+              "@id": "amf://id#1",
+              "@type": [
+                "doc:Trait",
+                "doc:AbstractDeclaration",
+                "doc:DomainElement"
+              ],
+              "doc:dataNode": {
+                "@id": "amf://id#2",
+                "@type": "data:Object",
+                "data:queryParameters": {
+                  "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2",
+                  "@type": "data:Object",
+                  "data:limit": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3",
+                    "@type": "data:Object",
+                    "data:default": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_9",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "25"
+                      }
+                    },
+                    "data:description": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_5",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "Limit in the response list"
+                      }
+                    },
+                    "data:example": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_8",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "100"
+                      }
+                    },
+                    "data:maximum": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_6",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "300"
+                      }
+                    },
+                    "data:minimum": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_7",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "1"
+                      }
+                    },
+                    "data:type": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_4",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "number"
+                      }
+                    }
+                  },
+                  "data:nextPageToken": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16",
+                    "@type": "data:Object",
+                    "data:description": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_19",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+                      }
+                    },
+                    "data:displayName": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_21",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "Page token"
+                      }
+                    },
+                    "data:example": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_18",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                      }
+                    },
+                    "data:pattern": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_20",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "[a-zA-Z0-9]+"
+                      }
+                    },
+                    "data:type": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_17",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "string"
+                      }
+                    }
+                  },
+                  "data:start": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10",
+                    "@type": "data:Object",
+                    "data:default": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_15",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "0"
+                      }
+                    },
+                    "data:description": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_12",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "The start entry of the list"
+                      }
+                    },
+                    "data:example": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_14",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "25"
+                      }
+                    },
+                    "data:minimum": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_13",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "0"
+                      }
+                    },
+                    "data:type": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_11",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "schema-org:name": "paginated"
+            },
+            "schema-org:name": "paginated"
+          },
+          "security:security": {
+            "@id": "amf://id#79",
+            "@type": [
+              "security:ParametrizedSecurityScheme",
+              "doc:DomainElement"
+            ],
+            "security:name": "x1",
+            "security:scheme": {
+              "@id": "amf://id#6",
+              "@type": [
+                "security:SecurityScheme",
+                "doc:DomainElement"
+              ],
+              "raml-http:header": {
+                "@id": "amf://id#7",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "header",
+                "raml-http:paramName": "SpecialToken",
+                "raml-http:schema": {
+                  "@id": "amf://id#8",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "Used to send a custom token.\n",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "Used to send a custom token.\n",
+                "schema-org:name": "SpecialToken",
+                "hydra:required": true
+              },
+              "raml-http:parameter": [
+                {
+                  "@id": "amf://id#9",
+                  "@type": [
+                    "raml-http:Parameter",
+                    "doc:DomainElement"
+                  ],
+                  "raml-http:binding": "query",
+                  "raml-http:paramName": "debugToken",
+                  "raml-http:schema": {
+                    "@id": "amf://id#10",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:in": {
+                      "@id": "amf://id#10/list",
+                      "@type": "rdfs:Seq",
+                      "rdfs:_1": {
+                        "@id": "amf://id#11",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Info"
+                        }
+                      },
+                      "rdfs:_2": {
+                        "@id": "amf://id#12",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Log"
+                        }
+                      },
+                      "rdfs:_3": {
+                        "@id": "amf://id#13",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Warning"
+                        }
+                      },
+                      "rdfs:_4": {
+                        "@id": "amf://id#14",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Error"
+                        }
+                      },
+                      "rdfs:_5": {
+                        "@id": "amf://id#15",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Critical"
+                        }
+                      }
+                    },
+                    "shacl:name": "schema"
+                  },
+                  "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+                  "schema-org:name": "debugToken",
+                  "hydra:required": false
+                },
+                {
+                  "@id": "amf://id#16",
+                  "@type": [
+                    "raml-http:Parameter",
+                    "doc:DomainElement"
+                  ],
+                  "raml-http:binding": "query",
+                  "raml-http:paramName": "booleanToken",
+                  "raml-http:schema": {
+                    "@id": "amf://id#17",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Just to test boolean values.",
+                    "shacl:datatype": {
+                      "@id": "xsd:boolean"
+                    },
+                    "shacl:defaultValue": {
+                      "@id": "amf://id#18",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:boolean",
+                        "@value": "true"
+                      }
+                    },
+                    "shacl:defaultValueStr": "true",
+                    "shacl:name": "schema"
+                  },
+                  "schema-org:description": "Just to test boolean values.",
+                  "schema-org:name": "booleanToken",
+                  "hydra:required": true
+                }
+              ],
+              "security:name": "x1",
+              "security:type": "x-custom",
+              "schema-org:description": "A custom security scheme for authenticating requests.\nIt allows to set `SpecialToken` header from the authorization panel.\nThe same header should be rendered in the headers editor with console using\nRAML JS parser.\nWith `AMF` console this is separated information.\nThis scheme also sets `debugToken` and `booleanToken` query parameters.\nBoth are enums, however `booleanToken` can only have `true` and `false`\nvalues.\n",
+              "hydra:response": [
+                {
+                  "@id": "amf://id#19",
+                  "@type": [
+                    "raml-http:Response",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "Bad token.\n",
+                  "schema-org:name": "401",
+                  "hydra:statusCode": "401"
+                },
+                {
+                  "@id": "amf://id#20",
+                  "@type": [
+                    "raml-http:Response",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:name": "403",
+                  "hydra:statusCode": "403"
+                }
+              ]
+            }
+          },
+          "hydra:expects": {
+            "@id": "amf://id#61",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:parameter": [
+              {
+                "@id": "amf://id#62",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "limit",
+                "raml-http:schema": {
+                  "@id": "amf://id#63",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#65",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#66",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "100"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#65/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#65",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#67"
+                      }
+                    },
+                    "shacl:raw": "100"
+                  },
+                  "schema-org:description": "Limit in the response list",
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:defaultValue": {
+                    "@id": "amf://id#64",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "25"
+                    }
+                  },
+                  "shacl:defaultValueStr": "25",
+                  "shacl:maxInclusive": 300,
+                  "shacl:minInclusive": 1,
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "Limit in the response list",
+                "schema-org:name": "limit",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#68",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "start",
+                "raml-http:schema": {
+                  "@id": "amf://id#69",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#71",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#72",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "25"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#71/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#71",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#73"
+                      }
+                    },
+                    "shacl:raw": "25"
+                  },
+                  "schema-org:description": "The start entry of the list",
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:defaultValue": {
+                    "@id": "amf://id#70",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "0"
+                    }
+                  },
+                  "shacl:defaultValueStr": "0",
+                  "shacl:minInclusive": 0,
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "The start entry of the list",
+                "schema-org:name": "start",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#74",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "nextPageToken",
+                "raml-http:schema": {
+                  "@id": "amf://id#75",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#76",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#77",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#76/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#76",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#78"
+                      }
+                    },
+                    "shacl:raw": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                  },
+                  "schema-org:description": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n",
+                  "schema-org:name": "Page token",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema",
+                  "shacl:pattern": "^[a-zA-Z0-9]+$"
+                },
+                "schema-org:description": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n",
+                "schema-org:name": "nextPageToken",
+                "hydra:required": true
+              }
+            ]
+          },
+          "hydra:method": "get"
+        }
+      },
+      {
+        "@id": "amf://id#80",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:parameter": {
+          "@id": "amf://id#86",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "path",
+          "raml-http:paramName": "param",
+          "raml-http:schema": {
+            "@id": "amf://id#87",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "This is test description with `markup`.\nThis value can be one of:\n- `value1`\n- `value2`\n- `value3`\n- any other value\n",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "This is test description with `markup`.\nThis value can be one of:\n- `value1`\n- `value2`\n- `value3`\n- any other value\n",
+          "schema-org:name": "param",
+          "hydra:required": true
+        },
+        "raml-http:path": "/security/{param}",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#81",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "security:security": {
+            "@id": "amf://id#85",
+            "@type": [
+              "security:ParametrizedSecurityScheme",
+              "doc:DomainElement"
+            ],
+            "security:name": "x2",
+            "security:scheme": {
+              "@id": "amf://id#22",
+              "@type": [
+                "security:SecurityScheme",
+                "doc:DomainElement"
+              ],
+              "raml-http:parameter": [
+                {
+                  "@id": "amf://id#23",
+                  "@type": [
+                    "raml-http:Parameter",
+                    "doc:DomainElement"
+                  ],
+                  "raml-http:binding": "query",
+                  "raml-http:paramName": "apiUserId",
+                  "raml-http:schema": {
+                    "@id": "amf://id#24",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Your api user ID. Some imaginary value.\n",
+                    "shacl:datatype": {
+                      "@id": "raml-shapes:number"
+                    },
+                    "shacl:name": "schema"
+                  },
+                  "schema-org:description": "Your api user ID. Some imaginary value.\n",
+                  "schema-org:name": "apiUserId",
+                  "hydra:required": true
+                },
+                {
+                  "@id": "amf://id#25",
+                  "@type": [
+                    "raml-http:Parameter",
+                    "doc:DomainElement"
+                  ],
+                  "raml-http:binding": "query",
+                  "raml-http:paramName": "apiNonce",
+                  "raml-http:schema": {
+                    "@id": "amf://id#26",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Random string",
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:name": "schema"
+                  },
+                  "schema-org:description": "Random string",
+                  "schema-org:name": "apiNonce",
+                  "hydra:required": true
+                }
+              ],
+              "security:name": "x2",
+              "security:type": "x-custom",
+              "schema-org:description": "Other custom security method for authorization.\n",
+              "hydra:response": {
+                "@id": "amf://id#27",
+                "@type": [
+                  "raml-http:Response",
+                  "doc:DomainElement"
+                ],
+                "raml-http:payload": {
+                  "@id": "amf://id#28",
+                  "@type": [
+                    "raml-http:Payload",
+                    "doc:DomainElement"
+                  ],
+                  "raml-http:mediaType": "application/json",
+                  "raml-http:schema": {
+                    "@id": "amf://id#29",
+                    "@type": [
+                      "shacl:NodeShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:closed": false,
+                    "shacl:name": "schema",
+                    "shacl:property": [
+                      {
+                        "@id": "amf://id#30",
+                        "@type": [
+                          "shacl:PropertyShape",
+                          "shacl:Shape",
+                          "raml-shapes:Shape"
+                        ],
+                        "raml-shapes:range": {
+                          "@id": "amf://id#31",
+                          "@type": [
+                            "raml-shapes:ScalarShape",
+                            "shacl:Shape",
+                            "raml-shapes:Shape",
+                            "doc:DomainElement"
+                          ],
+                          "schema-org:description": "Always true. Indicates that the response is errord.",
+                          "shacl:datatype": {
+                            "@id": "xsd:boolean"
+                          },
+                          "shacl:name": "error"
+                        },
+                        "shacl:minCount": 1,
+                        "shacl:name": "error",
+                        "shacl:path": {
+                          "@id": "data:error"
+                        }
+                      },
+                      {
+                        "@id": "amf://id#32",
+                        "@type": [
+                          "shacl:PropertyShape",
+                          "shacl:Shape",
+                          "raml-shapes:Shape"
+                        ],
+                        "raml-shapes:range": {
+                          "@id": "amf://id#33",
+                          "@type": [
+                            "raml-shapes:ScalarShape",
+                            "shacl:Shape",
+                            "raml-shapes:Shape",
+                            "doc:DomainElement"
+                          ],
+                          "schema-org:description": "Human readable message describing the error.",
+                          "shacl:datatype": {
+                            "@id": "xsd:string"
+                          },
+                          "shacl:name": "message"
+                        },
+                        "shacl:minCount": 1,
+                        "shacl:name": "message",
+                        "shacl:path": {
+                          "@id": "data:message"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "schema-org:description": "Bad token autorization.\n",
+                "schema-org:name": "401",
+                "hydra:statusCode": "401"
+              }
+            }
+          },
+          "hydra:expects": {
+            "@id": "amf://id#82",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:parameter": {
+              "@id": "amf://id#83",
+              "@type": [
+                "raml-http:Parameter",
+                "doc:DomainElement"
+              ],
+              "raml-http:binding": "query",
+              "raml-http:paramName": "securityLevel",
+              "raml-http:schema": {
+                "@id": "amf://id#84",
+                "@type": [
+                  "raml-shapes:ScalarShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape",
+                  "doc:DomainElement"
+                ],
+                "shacl:datatype": {
+                  "@id": "xsd:string"
+                },
+                "shacl:name": "schema"
+              },
+              "schema-org:name": "securityLevel",
+              "hydra:required": true
+            }
+          },
+          "hydra:method": "get"
+        }
+      },
+      {
+        "@id": "amf://id#88",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/complex",
+        "schema-org:name": "Complex route"
+      },
+      {
+        "@id": "amf://id#89",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/complex/path",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#90",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "hydra:method": "get"
+        }
+      },
+      {
+        "@id": "amf://id#91",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:parameter": {
+          "@id": "amf://id#113",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "path",
+          "raml-http:paramName": "to",
+          "raml-http:schema": {
+            "@id": "amf://id#114",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:name": "to",
+          "hydra:required": true
+        },
+        "raml-http:path": "/complex/path/{to}",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#92",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "doc:extends": {
+            "@id": "amf://id#93",
+            "@type": [
+              "doc:ParametrizedTrait",
+              "doc:ParametrizedDeclaration",
+              "doc:DomainElement"
+            ],
+            "doc:target": {
+              "@id": "amf://id#1",
+              "@type": [
+                "doc:Trait",
+                "doc:AbstractDeclaration",
+                "doc:DomainElement"
+              ],
+              "doc:dataNode": {
+                "@id": "amf://id#2",
+                "@type": "data:Object",
+                "data:queryParameters": {
+                  "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2",
+                  "@type": "data:Object",
+                  "data:limit": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3",
+                    "@type": "data:Object",
+                    "data:default": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_9",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "25"
+                      }
+                    },
+                    "data:description": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_5",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "Limit in the response list"
+                      }
+                    },
+                    "data:example": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_8",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "100"
+                      }
+                    },
+                    "data:maximum": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_6",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "300"
+                      }
+                    },
+                    "data:minimum": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_7",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "1"
+                      }
+                    },
+                    "data:type": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_4",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "number"
+                      }
+                    }
+                  },
+                  "data:nextPageToken": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16",
+                    "@type": "data:Object",
+                    "data:description": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_19",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+                      }
+                    },
+                    "data:displayName": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_21",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "Page token"
+                      }
+                    },
+                    "data:example": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_18",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                      }
+                    },
+                    "data:pattern": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_20",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "[a-zA-Z0-9]+"
+                      }
+                    },
+                    "data:type": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_17",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "string"
+                      }
+                    }
+                  },
+                  "data:start": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10",
+                    "@type": "data:Object",
+                    "data:default": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_15",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "0"
+                      }
+                    },
+                    "data:description": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_12",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "The start entry of the list"
+                      }
+                    },
+                    "data:example": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_14",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "25"
+                      }
+                    },
+                    "data:minimum": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_13",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "0"
+                      }
+                    },
+                    "data:type": {
+                      "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_11",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "schema-org:name": "paginated"
+            },
+            "schema-org:name": "paginated"
+          },
+          "hydra:expects": {
+            "@id": "amf://id#94",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:parameter": [
+              {
+                "@id": "amf://id#95",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "a",
+                "raml-http:schema": {
+                  "@id": "amf://id#96",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema"
+                },
+                "schema-org:name": "a",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#97",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "b",
+                "raml-http:schema": {
+                  "@id": "amf://id#98",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema"
+                },
+                "schema-org:name": "b",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#99",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "limit",
+                "raml-http:schema": {
+                  "@id": "amf://id#100",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#102",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#103",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "100"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#102/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#102",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#67"
+                      }
+                    },
+                    "shacl:raw": "100"
+                  },
+                  "schema-org:description": "Limit in the response list",
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:defaultValue": {
+                    "@id": "amf://id#101",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "25"
+                    }
+                  },
+                  "shacl:defaultValueStr": "25",
+                  "shacl:maxInclusive": 300,
+                  "shacl:minInclusive": 1,
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "Limit in the response list",
+                "schema-org:name": "limit",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#104",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "start",
+                "raml-http:schema": {
+                  "@id": "amf://id#105",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#107",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#108",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "25"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#107/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#107",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#73"
+                      }
+                    },
+                    "shacl:raw": "25"
+                  },
+                  "schema-org:description": "The start entry of the list",
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:defaultValue": {
+                    "@id": "amf://id#106",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "0"
+                    }
+                  },
+                  "shacl:defaultValueStr": "0",
+                  "shacl:minInclusive": 0,
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "The start entry of the list",
+                "schema-org:name": "start",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#109",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "nextPageToken",
+                "raml-http:schema": {
+                  "@id": "amf://id#110",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#111",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#112",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#111/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#111",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#78"
+                      }
+                    },
+                    "shacl:raw": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                  },
+                  "schema-org:description": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n",
+                  "schema-org:name": "Page token",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema",
+                  "shacl:pattern": "^[a-zA-Z0-9]+$"
+                },
+                "schema-org:description": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n",
+                "schema-org:name": "nextPageToken",
+                "hydra:required": true
+              }
+            ]
+          },
+          "hydra:method": "get"
+        }
+      },
+      {
+        "@id": "amf://id#115",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "doc:extends": {
+          "@id": "amf://id#116",
+          "@type": [
+            "doc:ParametrizedTrait",
+            "doc:ParametrizedDeclaration",
+            "doc:DomainElement"
+          ],
+          "doc:target": {
+            "@id": "amf://id#1",
+            "@type": [
+              "doc:Trait",
+              "doc:AbstractDeclaration",
+              "doc:DomainElement"
+            ],
+            "doc:dataNode": {
+              "@id": "amf://id#2",
+              "@type": "data:Object",
+              "data:queryParameters": {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2",
+                "@type": "data:Object",
+                "data:limit": {
+                  "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3",
+                  "@type": "data:Object",
+                  "data:default": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_9",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "25"
+                    }
+                  },
+                  "data:description": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_5",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "Limit in the response list"
+                    }
+                  },
+                  "data:example": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_8",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "100"
+                    }
+                  },
+                  "data:maximum": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_6",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "300"
+                    }
+                  },
+                  "data:minimum": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_7",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "1"
+                    }
+                  },
+                  "data:type": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_3/scalar_4",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "number"
+                    }
+                  }
+                },
+                "data:nextPageToken": {
+                  "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16",
+                  "@type": "data:Object",
+                  "data:description": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_19",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+                    }
+                  },
+                  "data:displayName": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_21",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "Page token"
+                    }
+                  },
+                  "data:example": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_18",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                    }
+                  },
+                  "data:pattern": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_20",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "[a-zA-Z0-9]+"
+                    }
+                  },
+                  "data:type": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_16/scalar_17",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "string"
+                    }
+                  }
+                },
+                "data:start": {
+                  "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10",
+                  "@type": "data:Object",
+                  "data:default": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_15",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "0"
+                    }
+                  },
+                  "data:description": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_12",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "The start entry of the list"
+                    }
+                  },
+                  "data:example": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_14",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "25"
+                    }
+                  },
+                  "data:minimum": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_13",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "0"
+                    }
+                  },
+                  "data:type": {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/traits/paginated/object_1/object_2/object_10/scalar_11",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "schema-org:name": "paginated"
+          },
+          "schema-org:name": "paginated"
+        },
+        "raml-http:parameter": {
+          "@id": "amf://id#143",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "path",
+          "raml-http:paramName": "to",
+          "raml-http:schema": {
+            "@id": "amf://id#144",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:name": "to",
+          "hydra:required": true
+        },
+        "raml-http:path": "/complex/path/{to}/endpoint",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#117",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "security:security": {
+            "@id": "amf://id#142",
+            "@type": [
+              "security:ParametrizedSecurityScheme",
+              "doc:DomainElement"
+            ],
+            "security:name": "x1",
+            "security:scheme": {
+              "@id": "amf://id#6",
+              "@type": [
+                "security:SecurityScheme",
+                "doc:DomainElement"
+              ],
+              "raml-http:header": {
+                "@id": "amf://id#7",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "header",
+                "raml-http:paramName": "SpecialToken",
+                "raml-http:schema": {
+                  "@id": "amf://id#8",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "Used to send a custom token.\n",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "Used to send a custom token.\n",
+                "schema-org:name": "SpecialToken",
+                "hydra:required": true
+              },
+              "raml-http:parameter": [
+                {
+                  "@id": "amf://id#9",
+                  "@type": [
+                    "raml-http:Parameter",
+                    "doc:DomainElement"
+                  ],
+                  "raml-http:binding": "query",
+                  "raml-http:paramName": "debugToken",
+                  "raml-http:schema": {
+                    "@id": "amf://id#10",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:in": {
+                      "@id": "amf://id#10/list",
+                      "@type": "rdfs:Seq",
+                      "rdfs:_1": {
+                        "@id": "amf://id#11",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Info"
+                        }
+                      },
+                      "rdfs:_2": {
+                        "@id": "amf://id#12",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Log"
+                        }
+                      },
+                      "rdfs:_3": {
+                        "@id": "amf://id#13",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Warning"
+                        }
+                      },
+                      "rdfs:_4": {
+                        "@id": "amf://id#14",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Error"
+                        }
+                      },
+                      "rdfs:_5": {
+                        "@id": "amf://id#15",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Critical"
+                        }
+                      }
+                    },
+                    "shacl:name": "schema"
+                  },
+                  "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+                  "schema-org:name": "debugToken",
+                  "hydra:required": false
+                },
+                {
+                  "@id": "amf://id#16",
+                  "@type": [
+                    "raml-http:Parameter",
+                    "doc:DomainElement"
+                  ],
+                  "raml-http:binding": "query",
+                  "raml-http:paramName": "booleanToken",
+                  "raml-http:schema": {
+                    "@id": "amf://id#17",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Just to test boolean values.",
+                    "shacl:datatype": {
+                      "@id": "xsd:boolean"
+                    },
+                    "shacl:defaultValue": {
+                      "@id": "amf://id#18",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:boolean",
+                        "@value": "true"
+                      }
+                    },
+                    "shacl:defaultValueStr": "true",
+                    "shacl:name": "schema"
+                  },
+                  "schema-org:description": "Just to test boolean values.",
+                  "schema-org:name": "booleanToken",
+                  "hydra:required": true
+                }
+              ],
+              "security:name": "x1",
+              "security:type": "x-custom",
+              "schema-org:description": "A custom security scheme for authenticating requests.\nIt allows to set `SpecialToken` header from the authorization panel.\nThe same header should be rendered in the headers editor with console using\nRAML JS parser.\nWith `AMF` console this is separated information.\nThis scheme also sets `debugToken` and `booleanToken` query parameters.\nBoth are enums, however `booleanToken` can only have `true` and `false`\nvalues.\n",
+              "hydra:response": [
+                {
+                  "@id": "amf://id#19",
+                  "@type": [
+                    "raml-http:Response",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "Bad token.\n",
+                  "schema-org:name": "401",
+                  "hydra:statusCode": "401"
+                },
+                {
+                  "@id": "amf://id#20",
+                  "@type": [
+                    "raml-http:Response",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:name": "403",
+                  "hydra:statusCode": "403"
+                }
+              ]
+            }
+          },
+          "hydra:expects": {
+            "@id": "amf://id#118",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:parameter": [
+              {
+                "@id": "amf://id#123",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "limit",
+                "raml-http:schema": {
+                  "@id": "amf://id#124",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#126",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#127",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "100"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#126/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#126",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#67"
+                      }
+                    },
+                    "shacl:raw": "100"
+                  },
+                  "schema-org:description": "Limit in the response list",
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:defaultValue": {
+                    "@id": "amf://id#125",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "25"
+                    }
+                  },
+                  "shacl:defaultValueStr": "25",
+                  "shacl:maxInclusive": 300,
+                  "shacl:minInclusive": 1,
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "Limit in the response list",
+                "schema-org:name": "limit",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#128",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "start",
+                "raml-http:schema": {
+                  "@id": "amf://id#129",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#131",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#132",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:integer",
+                        "@value": "25"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#131/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#131",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#73"
+                      }
+                    },
+                    "shacl:raw": "25"
+                  },
+                  "schema-org:description": "The start entry of the list",
+                  "shacl:datatype": {
+                    "@id": "raml-shapes:number"
+                  },
+                  "shacl:defaultValue": {
+                    "@id": "amf://id#130",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:integer",
+                      "@value": "0"
+                    }
+                  },
+                  "shacl:defaultValueStr": "0",
+                  "shacl:minInclusive": 0,
+                  "shacl:name": "schema"
+                },
+                "schema-org:description": "The start entry of the list",
+                "schema-org:name": "start",
+                "hydra:required": true
+              },
+              {
+                "@id": "amf://id#133",
+                "@type": [
+                  "raml-http:Parameter",
+                  "doc:DomainElement"
+                ],
+                "raml-http:binding": "query",
+                "raml-http:paramName": "nextPageToken",
+                "raml-http:schema": {
+                  "@id": "amf://id#134",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "doc:examples": {
+                    "@id": "amf://id#135",
+                    "@type": [
+                      "doc:Example",
+                      "doc:DomainElement"
+                    ],
+                    "doc:strict": true,
+                    "doc:structuredValue": {
+                      "@id": "amf://id#136",
+                      "@type": "data:Scalar",
+                      "data:value": {
+                        "@type": "xsd:string",
+                        "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                      }
+                    },
+                    "http://a.ml/vocabularies/document-source-maps#sources": {
+                      "@id": "amf://id#135/source-map",
+                      "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                      "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                        "http://a.ml/vocabularies/document-source-maps#element": "amf://id#135",
+                        "http://a.ml/vocabularies/document-source-maps#value": "amf://id#78"
+                      }
+                    },
+                    "shacl:raw": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                  },
+                  "schema-org:description": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n",
+                  "schema-org:name": "Page token",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "schema",
+                  "shacl:pattern": "^[a-zA-Z0-9]+$"
+                },
+                "schema-org:description": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n",
+                "schema-org:name": "nextPageToken",
+                "hydra:required": true
+              }
+            ],
+            "raml-http:payload": {
+              "@id": "amf://id#119",
+              "@type": [
+                "raml-http:Payload",
+                "doc:DomainElement"
+              ],
+              "raml-http:mediaType": "application/json",
+              "raml-http:schema": {
+                "@id": "amf://id#120",
+                "@type": [
+                  "shacl:NodeShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape",
+                  "doc:DomainElement"
+                ],
+                "shacl:closed": false,
+                "shacl:name": "schema",
+                "shacl:property": {
+                  "@id": "amf://id#121",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#122",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:name": "test"
+                  },
+                  "shacl:minCount": 1,
+                  "shacl:name": "test",
+                  "shacl:path": {
+                    "@id": "data:test"
+                  }
+                }
+              }
+            }
+          },
+          "hydra:method": "post",
+          "hydra:returns": {
+            "@id": "amf://id#137",
+            "@type": [
+              "raml-http:Response",
+              "doc:DomainElement"
+            ],
+            "raml-http:payload": {
+              "@id": "amf://id#138",
+              "@type": [
+                "raml-http:Payload",
+                "doc:DomainElement"
+              ],
+              "raml-http:mediaType": "application/json",
+              "raml-http:schema": {
+                "@id": "amf://id#139",
+                "@type": [
+                  "shacl:NodeShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape",
+                  "doc:DomainElement"
+                ],
+                "shacl:closed": false,
+                "shacl:name": "schema",
+                "shacl:property": {
+                  "@id": "amf://id#140",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#141",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:datatype": {
+                      "@id": "xsd:boolean"
+                    },
+                    "shacl:name": "error"
+                  },
+                  "shacl:minCount": 1,
+                  "shacl:name": "error",
+                  "shacl:path": {
+                    "@id": "data:error"
+                  }
+                }
+              }
+            },
+            "schema-org:name": "200",
+            "hydra:statusCode": "200"
+          }
+        }
+      },
+      {
+        "@id": "amf://id#145",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/no-qp",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#146",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "hydra:method": "get"
+        }
+      }
+    ],
+    "raml-http:server": {
+      "@id": "amf://id#147",
+      "@type": [
+        "raml-http:Server",
+        "doc:DomainElement"
+      ],
+      "raml-http:url": "http://{host}.api.domain.com:8254/{apiVersion}/",
+      "raml-http:variable": [
+        {
+          "@id": "amf://id#148",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "path",
+          "raml-http:paramName": "host",
+          "raml-http:schema": {
+            "@id": "amf://id#149",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Either `production` or `development`",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "schema",
+            "shacl:pattern": "^(production|development)$"
+          },
+          "schema-org:description": "Either `production` or `development`",
+          "schema-org:name": "host",
+          "hydra:required": true
+        },
+        {
+          "@id": "amf://id#150",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "path",
+          "raml-http:paramName": "apiVersion",
+          "raml-http:schema": {
+            "@id": "amf://id#151",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "API documentation version.\nCan be any of:\n- `1` - deprecated\n- `2` - scheduled to deprecate\n- `3` - current\n",
+            "schema-org:name": "API version",
+            "shacl:datatype": {
+              "@id": "xsd:integer"
+            },
+            "shacl:in": {
+              "@id": "amf://id#151/list",
+              "@type": "rdfs:Seq",
+              "rdfs:_1": {
+                "@id": "amf://id#152",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "1"
+                }
+              },
+              "rdfs:_2": {
+                "@id": "amf://id#153",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "2"
+                }
+              },
+              "rdfs:_3": {
+                "@id": "amf://id#154",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "3"
+                }
+              }
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "API documentation version.\nCan be any of:\n- `1` - deprecated\n- `2` - scheduled to deprecate\n- `3` - current\n",
+          "schema-org:name": "apiVersion",
+          "hydra:required": true
+        }
+      ]
+    },
+    "schema-org:name": "Oauth 2.0 example",
+    "schema-org:version": "v1"
+  },
+  "doc:references": [
+    {
+      "@id": "amf://id#35",
+      "@type": [
+        "doc:SecuritySchemeFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#6",
+        "@type": [
+          "security:SecurityScheme",
+          "doc:DomainElement"
+        ],
+        "raml-http:header": {
+          "@id": "amf://id#7",
+          "@type": [
+            "raml-http:Parameter",
+            "doc:DomainElement"
+          ],
+          "raml-http:binding": "header",
+          "raml-http:paramName": "SpecialToken",
+          "raml-http:schema": {
+            "@id": "amf://id#8",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Used to send a custom token.\n",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "schema"
+          },
+          "schema-org:description": "Used to send a custom token.\n",
+          "schema-org:name": "SpecialToken",
+          "hydra:required": true
+        },
+        "raml-http:parameter": [
+          {
+            "@id": "amf://id#9",
+            "@type": [
+              "raml-http:Parameter",
+              "doc:DomainElement"
+            ],
+            "raml-http:binding": "query",
+            "raml-http:paramName": "debugToken",
+            "raml-http:schema": {
+              "@id": "amf://id#10",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:in": {
+                "@id": "amf://id#10/list",
+                "@type": "rdfs:Seq",
+                "rdfs:_1": {
+                  "@id": "amf://id#11",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "Info"
+                  }
+                },
+                "rdfs:_2": {
+                  "@id": "amf://id#12",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "Log"
+                  }
+                },
+                "rdfs:_3": {
+                  "@id": "amf://id#13",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "Warning"
+                  }
+                },
+                "rdfs:_4": {
+                  "@id": "amf://id#14",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "Error"
+                  }
+                },
+                "rdfs:_5": {
+                  "@id": "amf://id#15",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "Critical"
+                  }
+                }
+              },
+              "shacl:name": "schema"
+            },
+            "schema-org:description": "Select one of available values to run the request in the debug mode with selected level.",
+            "schema-org:name": "debugToken",
+            "hydra:required": false
+          },
+          {
+            "@id": "amf://id#16",
+            "@type": [
+              "raml-http:Parameter",
+              "doc:DomainElement"
+            ],
+            "raml-http:binding": "query",
+            "raml-http:paramName": "booleanToken",
+            "raml-http:schema": {
+              "@id": "amf://id#17",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "Just to test boolean values.",
+              "shacl:datatype": {
+                "@id": "xsd:boolean"
+              },
+              "shacl:defaultValue": {
+                "@id": "amf://id#18",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:boolean",
+                  "@value": "true"
+                }
+              },
+              "shacl:defaultValueStr": "true",
+              "shacl:name": "schema"
+            },
+            "schema-org:description": "Just to test boolean values.",
+            "schema-org:name": "booleanToken",
+            "hydra:required": true
+          }
+        ],
+        "security:name": "x1",
+        "security:type": "x-custom",
+        "schema-org:description": "A custom security scheme for authenticating requests.\nIt allows to set `SpecialToken` header from the authorization panel.\nThe same header should be rendered in the headers editor with console using\nRAML JS parser.\nWith `AMF` console this is separated information.\nThis scheme also sets `debugToken` and `booleanToken` query parameters.\nBoth are enums, however `booleanToken` can only have `true` and `false`\nvalues.\n",
+        "hydra:response": [
+          {
+            "@id": "amf://id#19",
+            "@type": [
+              "raml-http:Response",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Bad token.\n",
+            "schema-org:name": "401",
+            "hydra:statusCode": "401"
+          },
+          {
+            "@id": "amf://id#20",
+            "@type": [
+              "raml-http:Response",
+              "doc:DomainElement"
+            ],
+            "schema-org:name": "403",
+            "hydra:statusCode": "403"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "amf://id#36",
+      "@type": [
+        "doc:SecuritySchemeFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#22",
+        "@type": [
+          "security:SecurityScheme",
+          "doc:DomainElement"
+        ],
+        "raml-http:parameter": [
+          {
+            "@id": "amf://id#23",
+            "@type": [
+              "raml-http:Parameter",
+              "doc:DomainElement"
+            ],
+            "raml-http:binding": "query",
+            "raml-http:paramName": "apiUserId",
+            "raml-http:schema": {
+              "@id": "amf://id#24",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "Your api user ID. Some imaginary value.\n",
+              "shacl:datatype": {
+                "@id": "raml-shapes:number"
+              },
+              "shacl:name": "schema"
+            },
+            "schema-org:description": "Your api user ID. Some imaginary value.\n",
+            "schema-org:name": "apiUserId",
+            "hydra:required": true
+          },
+          {
+            "@id": "amf://id#25",
+            "@type": [
+              "raml-http:Parameter",
+              "doc:DomainElement"
+            ],
+            "raml-http:binding": "query",
+            "raml-http:paramName": "apiNonce",
+            "raml-http:schema": {
+              "@id": "amf://id#26",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "Random string",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "schema"
+            },
+            "schema-org:description": "Random string",
+            "schema-org:name": "apiNonce",
+            "hydra:required": true
+          }
+        ],
+        "security:name": "x2",
+        "security:type": "x-custom",
+        "schema-org:description": "Other custom security method for authorization.\n",
+        "hydra:response": {
+          "@id": "amf://id#27",
+          "@type": [
+            "raml-http:Response",
+            "doc:DomainElement"
+          ],
+          "raml-http:payload": {
+            "@id": "amf://id#28",
+            "@type": [
+              "raml-http:Payload",
+              "doc:DomainElement"
+            ],
+            "raml-http:mediaType": "application/json",
+            "raml-http:schema": {
+              "@id": "amf://id#29",
+              "@type": [
+                "shacl:NodeShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "shacl:closed": false,
+              "shacl:name": "schema",
+              "shacl:property": [
+                {
+                  "@id": "amf://id#30",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#31",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Always true. Indicates that the response is errord.",
+                    "shacl:datatype": {
+                      "@id": "xsd:boolean"
+                    },
+                    "shacl:name": "error"
+                  },
+                  "shacl:minCount": 1,
+                  "shacl:name": "error",
+                  "shacl:path": {
+                    "@id": "data:error"
+                  }
+                },
+                {
+                  "@id": "amf://id#32",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#33",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:description": "Human readable message describing the error.",
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:name": "message"
+                  },
+                  "shacl:minCount": 1,
+                  "shacl:name": "message",
+                  "shacl:path": {
+                    "@id": "data:message"
+                  }
+                }
+              ]
+            }
+          },
+          "schema-org:description": "Bad token autorization.\n",
+          "schema-org:name": "401",
+          "hydra:statusCode": "401"
+        }
+      }
+    }
+  ]
+}
