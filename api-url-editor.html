@@ -533,7 +533,7 @@
      * It's to be used besides the Polymer's data binding system.
      */
     _extValueChangedHandler(e) {
-      if (e.target === e.composedPath()[0]) {
+      if (e.composedPath()[0] === this) {
         return;
       }
       this.__cancelValueChange = true;
