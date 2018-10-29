@@ -111,7 +111,9 @@
    * @memberof ApiElements
    */
   class ApiUrlEditor extends _base {
-    static get is() { return 'api-url-editor';}
+    static get is() {
+      return 'api-url-editor';
+    }
     static get properties() {
       return {
         /**
@@ -494,14 +496,18 @@
      * `queryModel` list
      */
     _applyQueryParamsValues(map) {
-      for (let name in map) {
-        const index = this._findModelIndex(name, 'query');
+      if (!map) {
+        return;
+      }
+      const keys = Object.keys(map);
+      keys.forEach((key) => {
+        const index = this._findModelIndex(key, 'query');
         if (index !== -1) {
           this.__ignoreValueChange = true;
           this.set(['queryModel', index, 'value'], map[name]);
           this.__ignoreValueChange = false;
         }
-      }
+      });
     }
 
     _findModelIndex(name, type) {
@@ -531,6 +537,8 @@
      * A handler for the `url-value-changed` event.
      * If this element is not the source of the event then it will update the `value` property.
      * It's to be used besides the Polymer's data binding system.
+     *
+     * @param {CustomEvent} e
      */
     _extValueChangedHandler(e) {
       if (e.composedPath()[0] === this) {
