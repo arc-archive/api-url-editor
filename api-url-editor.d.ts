@@ -142,6 +142,13 @@ declare namespace ApiElements {
     _applyUriParams(url: String|null, model: any[]|null): String|null;
 
     /**
+     * Creates a RegExp object to replace template variable from the base string
+     *
+     * @param name Name of the parameter to be replaced
+     */
+    _createUrlReplaceRegex(name: String|null): RegExp|null;
+
+    /**
      * Applies query parameters to the URL.
      * Query parameters that are not required by the API spec and don't have value
      * are removed from the URL. Parameters that are required and don't have
@@ -217,7 +224,7 @@ declare namespace ApiElements {
      * If this element is not the source of the event then it will update the `value` property.
      * It's to be used besides the Polymer's data binding system.
      */
-    _extValueChangedHandler(e: any): void;
+    _extValueChangedHandler(e: CustomEvent|null): void;
     _getValidity(): any;
 
     /**
