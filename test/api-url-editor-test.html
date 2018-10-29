@@ -100,14 +100,14 @@
         });
 
         test('Dispatches url-value-changed custom event', () => {
-          var spy = sinon.stub();
+          const spy = sinon.stub();
           element.addEventListener('url-value-changed', spy);
           element.value = URL;
           assert.isTrue(spy.calledOnce);
         });
 
         test('Dispatches url-value-changed event when query parameter change', () => {
-          var spy = sinon.stub();
+          const spy = sinon.stub();
           element.addEventListener('url-value-changed', spy);
           element.set('queryModel', querylModel);
           assert.isTrue(spy.calledOnce);
@@ -145,10 +145,51 @@
 
         test('Does not redispatch the event', () => {
           const url = 'https://domain.com/path';
-          var spy = sinon.stub();
+          const spy = sinon.stub();
           element.addEventListener('url-value-changed', spy);
           fire(url);
           assert.isFalse(spy.called);
+        });
+      });
+
+      suite('URL templates', () => {
+        let element;
+        let pathlModel;
+        const TEST_PATH = '/path/{+var}';
+        setup(() => {
+          element = fixture('Basic');
+          element.baseUri = BASE_URI;
+          element.endpointPath = TEST_PATH;
+          pathlModel = {
+            value: '/test and extra!',
+            name: '+var',
+            required: true,
+            schema: {}
+          };
+        });
+
+        test('Processes URL template with plus sign', () => {
+          const item = Object.assign({}, pathlModel);
+          item.value = 'test';
+          const model = [item];
+          element.set('pathModel', model);
+          assert.equal(element.value, 'https://{base}.domain.com/path/test');
+        });
+
+        test('Encodes special characters', () => {
+          const item = Object.assign({}, pathlModel);
+          item.value = 'test and extra';
+          const model = [item];
+          element.set('pathModel', model);
+          assert.equal(element.value, 'https://{base}.domain.com/path/test%20and%20extra');
+        });
+
+        test('Does not encode reserved characters', () => {
+          const item = Object.assign({}, pathlModel);
+          item.value = '/test and extra!';
+          const model = [item];
+          element.set('pathModel', model);
+          assert.equal(element.value, 'https://{base}.domain.com/path//test%20and%20extra!');
         });
       });
     </script>

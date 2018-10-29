@@ -22,7 +22,7 @@
         ],
         "http://a.ml/vocabularies/http#server": [
           {
-            "@id": "amf://id#152",
+            "@id": "amf://id#157",
             "@type": [
               "http://a.ml/vocabularies/http#Server",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -34,7 +34,7 @@
             ],
             "http://a.ml/vocabularies/http#variable": [
               {
-                "@id": "amf://id#153",
+                "@id": "amf://id#158",
                 "@type": [
                   "http://a.ml/vocabularies/http#Parameter",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -66,7 +66,7 @@
                 ],
                 "http://a.ml/vocabularies/http#schema": [
                   {
-                    "@id": "amf://id#154",
+                    "@id": "amf://id#159",
                     "@type": [
                       "http://a.ml/vocabularies/shapes#ScalarShape",
                       "http://www.w3.org/ns/shacl#Shape",
@@ -97,7 +97,7 @@
                 ]
               },
               {
-                "@id": "amf://id#155",
+                "@id": "amf://id#160",
                 "@type": [
                   "http://a.ml/vocabularies/http#Parameter",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -129,7 +129,7 @@
                 ],
                 "http://a.ml/vocabularies/http#schema": [
                   {
-                    "@id": "amf://id#156",
+                    "@id": "amf://id#161",
                     "@type": [
                       "http://a.ml/vocabularies/shapes#ScalarShape",
                       "http://www.w3.org/ns/shacl#Shape",
@@ -158,11 +158,11 @@
                     ],
                     "http://www.w3.org/ns/shacl#in": [
                       {
-                        "@id": "amf://id#156/list",
+                        "@id": "amf://id#161/list",
                         "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
                         "http://www.w3.org/2000/01/rdf-schema#_1": [
                           {
-                            "@id": "amf://id#157",
+                            "@id": "amf://id#162",
                             "@type": [
                               "http://a.ml/vocabularies/data#Scalar"
                             ],
@@ -176,7 +176,7 @@
                         ],
                         "http://www.w3.org/2000/01/rdf-schema#_2": [
                           {
-                            "@id": "amf://id#158",
+                            "@id": "amf://id#163",
                             "@type": [
                               "http://a.ml/vocabularies/data#Scalar"
                             ],
@@ -190,7 +190,7 @@
                         ],
                         "http://www.w3.org/2000/01/rdf-schema#_3": [
                           {
-                            "@id": "amf://id#159",
+                            "@id": "amf://id#164",
                             "@type": [
                               "http://a.ml/vocabularies/data#Scalar"
                             ],
@@ -3532,6 +3532,94 @@
                 "http://www.w3.org/ns/hydra/core#method": [
                   {
                     "@value": "get"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "amf://id#152",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/plus"
+              }
+            ]
+          },
+          {
+            "@id": "amf://id#153",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/plus/{+page}"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "amf://id#154",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "get"
+                  }
+                ]
+              }
+            ],
+            "http://a.ml/vocabularies/http#parameter": [
+              {
+                "@id": "amf://id#155",
+                "@type": [
+                  "http://a.ml/vocabularies/http#Parameter",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "+page"
+                  }
+                ],
+                "http://a.ml/vocabularies/http#paramName": [
+                  {
+                    "@value": "+page"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#required": [
+                  {
+                    "@value": true
+                  }
+                ],
+                "http://a.ml/vocabularies/http#binding": [
+                  {
+                    "@value": "path"
+                  }
+                ],
+                "http://a.ml/vocabularies/http#schema": [
+                  {
+                    "@id": "amf://id#156",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "+page"
+                      }
+                    ]
                   }
                 ]
               }

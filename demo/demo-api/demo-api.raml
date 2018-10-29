@@ -75,7 +75,7 @@ securitySchemes:
           type: string[]
 /traits:
   get:
-    is:  [paginated]
+    is: [paginated]
     securedBy: [x1]
 /security/{param}:
   securedBy: [x2]
@@ -123,3 +123,6 @@ securitySchemes:
                     error: boolean
 /no-qp:
   get:
+/plus:
+  /{+page}:
+    get:

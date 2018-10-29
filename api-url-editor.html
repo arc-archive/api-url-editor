@@ -323,11 +323,26 @@
         if (value.trim() === '') {
           continue;
         }
-        value = this._wwwFormUrlEncodePiece(value);
-        const re = new RegExp('{' + name + '}');
+        if (name[0] === '+' || name[0] === '#') {
+          value = encodeURI(value);
+        } else {
+          value = this._wwwFormUrlEncodePiece(value);
+        }
+        const re = this._createUrlReplaceRegex(name);
         url = url.replace(re, value);
       }
       return url;
+    }
+    /**
+     * Creates a RegExp object to replace template variable from the base string
+     * @param {String} name Name of the parameter to be replaced
+     * @return {RegExp}
+     */
+    _createUrlReplaceRegex(name) {
+      if (name[0] === '+' || name[0] === '#') {
+        name = '\\' + name;
+      }
+      return new RegExp('{' + name + '}');
     }
     /**
      * Applies query parameters to the URL.
