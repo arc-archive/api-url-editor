@@ -8,5 +8,8 @@
  *   index.html
  */
 
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+
 /// <reference path="../iron-component-page/iron-component-page.d.ts" />
 
