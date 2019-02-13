@@ -7,7 +7,6 @@
 <link rel="import" href="../events-target-behavior/events-target-behavior.html">
 <dom-module id="api-url-editor">
   <template>
-    <style include="markdown-styles"></style>
     <style>
     :host {
       outline: none;
@@ -519,7 +518,7 @@
         const index = this._findModelIndex(key, 'query');
         if (index !== -1) {
           this.__ignoreValueChange = true;
-          this.set(['queryModel', index, 'value'], map[name]);
+          this.set(['queryModel', index, 'value'], map[key]);
           this.__ignoreValueChange = false;
         }
       });
@@ -627,19 +626,13 @@
       return paramsNames;
     }
 
-    fire(type, detail, options) {
-      const defaults = {
+    fire(type, detail) {
+      const e = new CustomEvent(type, {
         bubbles: true,
         composed: true,
-        cancelable: false
-      };
-      if (!options) {
-        options = defaults;
-      } else {
-        options = Object.assign(defaults, options);
-      }
-      options.detail = detail;
-      const e = new CustomEvent(type, options);
+        cancelable: false,
+        detail
+      });
       this.dispatchEvent(e);
       return e;
     }
