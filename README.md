@@ -1,4 +1,4 @@
-[![Published on NPM](https://img.shields.io/npm/v/@advanced-rest-client/code-mirror.svg)](https://www.npmjs.com/package/@api-components/api-url-editor)
+[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-url-editor.svg)](https://www.npmjs.com/package/@api-components/api-url-editor)
 
 [![Build Status](https://travis-ci.org/advanced-rest-client/api-url-data-model.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/api-url-editor)
 
