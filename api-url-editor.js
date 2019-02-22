@@ -1,15 +1,16 @@
-import { PolymerElement } from '../../@polymer/polymer/polymer-element.js';
-import '../../@polymer/paper-input/paper-input-container.js';
-import { PaperInputBehavior } from '../../@polymer/paper-input/paper-input-behavior.js';
-import '../../@polymer/paper-input/paper-input-error.js';
-import { IronValidatableBehavior } from '../../@polymer/iron-validatable-behavior/iron-validatable-behavior.js';
-import '../../@polymer/iron-input/iron-input.js';
-import { EventsTargetBehavior } from '../../events-target-behavior/events-target-behavior.js';
-import { mixinBehaviors } from '../../@polymer/polymer/lib/legacy/class.js';
-import { html } from '../../@polymer/polymer/lib/utils/html-tag.js';
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {PaperInputBehavior} from '@polymer/paper-input/paper-input-behavior.js';
+import {IronValidatableBehavior} from '@polymer/iron-validatable-behavior/iron-validatable-behavior.js';
+import {EventsTargetMixin} from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
+import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+import '@polymer/paper-input/paper-input-container.js';
+import '@polymer/paper-input/paper-input-error.js';
+import '@polymer/iron-input/iron-input.js';
+
 const _inputBehavior2 = !(PaperInputBehavior instanceof Array);
 const _behaviorsQueue = [];
-let _base = EventsTargetBehavior(PolymerElement);
+let _base = EventsTargetMixin(PolymerElement);
 if (_inputBehavior2) {
   // API console with Anypoint styling has its own implementation of
   // paper input behavior which is for Polymer 2 only.
@@ -17,11 +18,12 @@ if (_inputBehavior2) {
 } else {
   _behaviorsQueue.push(PaperInputBehavior);
 }
-if (!Polymer.IronValidatableMixin) {
-  _behaviorsQueue.push(IronValidatableBehavior);
-} else {
-  _base = Polymer.IronValidatableMixin(_base);
-}
+
+_behaviorsQueue.push(IronValidatableBehavior);
+// if (!Polymer.IronValidatableMixin) {
+// } else {
+//   _base = Polymer.IronValidatableMixin(_base);
+// }
 _base = mixinBehaviors(_behaviorsQueue, _base);
 /**
  * `api-url-editor`
@@ -34,9 +36,9 @@ _base = mixinBehaviors(_behaviorsQueue, _base);
  * @customElement
  * @polymer
  * @demo demo/index.html
- * @appliesMixin Polymer.PaperInputBehavior
- * @appliesMixin Polymer.IronValidatableBehavior
- * @appliesMixin ArcBehaviors.EventsTargetBehavior
+ * @polymerBehavior Polymer.PaperInputBehavior
+ * @polymerBehavior Polymer.IronValidatableBehavior
+ * @appliesMixin EventsTargetMixin
  * @memberof ApiElements
  */
 class ApiUrlEditor extends _base {
@@ -72,10 +74,17 @@ class ApiUrlEditor extends _base {
       padding-bottom: 0;
     }
     </style>
-    <paper-input-container no-label-float="[[noLabelFloat]]" always-float-label="[[alwaysFloatLabel]]" auto-validate\$="[[autoValidate]]" disabled\$="[[disabled]]" invalid="[[invalid]]">
+    <paper-input-container no-label-float="[[noLabelFloat]]" always-float-label="[[alwaysFloatLabel]]"
+      auto-validate\$="[[autoValidate]]" disabled\$="[[disabled]]" invalid="[[invalid]]">
       <label hidden\$="[[!label]]" slot="label">[[label]]</label>
       <iron-input id\$="[[_inputId]]" bind-value="{{value}}" slot="input" invalid="{{invalid}}">
-        <input aria-labelledby\$="[[_ariaLabelledBy]]" aria-describedby\$="[[_ariaDescribedBy]]" disabled\$="[[disabled]]" title\$="[[title]]" type="url" required\$="[[required]]" autocomplete\$="[[autocomplete]]" autofocus\$="[[autofocus]]" inputmode\$="[[inputmode]]" name\$="[[name]]" placeholder\$="[[placeholder]]" readonly\$="[[readonly]]" list\$="[[list]]" autocapitalize\$="[[autocapitalize]]" autocorrect\$="[[autocorrect]]" on-change="_onChange" on-blur="_onElementBlur" on-input="__userInputHandler" tabindex\$="[[tabIndex]]" autosave\$="[[autosave]]">
+        <input aria-labelledby\$="[[_ariaLabelledBy]]" aria-describedby\$="[[_ariaDescribedBy]]"
+          disabled\$="[[disabled]]" title\$="[[title]]" type="url" required\$="[[required]]"
+          autocomplete\$="[[autocomplete]]" autofocus\$="[[autofocus]]" inputmode\$="[[inputmode]]"
+          name\$="[[name]]" placeholder\$="[[placeholder]]" readonly\$="[[readonly]]" list\$="[[list]]"
+          autocapitalize\$="[[autocapitalize]]" autocorrect\$="[[autocorrect]]"
+          on-change="_onChange" on-blur="_onElementBlur" on-input="__userInputHandler"
+          tabindex\$="[[tabIndex]]" autosave\$="[[autosave]]">
       </iron-input>
       <template is="dom-if" if="[[invalid]]">
         <paper-input-error slot="add-on" invalid="">[[errorMessage]]</paper-input-error>

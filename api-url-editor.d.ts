@@ -5,20 +5,12 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   api-url-editor.html
+ *   api-url-editor.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
-
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../paper-input/paper-input-container.d.ts" />
-/// <reference path="../paper-input/paper-input-behavior.d.ts" />
-/// <reference path="../paper-input/paper-input-error.d.ts" />
-/// <reference path="../iron-validatable-behavior/iron-validatable-behavior.d.ts" />
-/// <reference path="../iron-input/iron-input.d.ts" />
-/// <reference path="../events-target-behavior/events-target-behavior.d.ts" />
 
 declare namespace ApiElements {
 
@@ -31,10 +23,8 @@ declare namespace ApiElements {
    * It supports validation for URL values that may contain variables.
    */
   class ApiUrlEditor extends
-    Polymer.PaperInputBehavior(
-    Polymer.IronValidatableBehavior(
-    ArcBehaviors.EventsTargetBehavior(
-    _base))) {
+    EventsTargetMixin(
+    _base) {
 
     /**
      * The label for this input.
@@ -92,9 +82,9 @@ declare namespace ApiElements {
      * URI parameters.
      */
     readonly urlSearchRegexp: RegExp|null|undefined;
+    ready(): void;
     _attachListeners(node: any): void;
     _detachListeners(node: any): void;
-    ready(): void;
 
     /**
      * Computes endpoint's full URI with (possibly) variables in it.
@@ -260,6 +250,11 @@ declare namespace ApiElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "api-url-editor": ApiElements.ApiUrlEditor;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "api-url-editor": ApiElements.ApiUrlEditor;
+  }
 }
+
+export {};
