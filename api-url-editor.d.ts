@@ -256,7 +256,7 @@ declare namespace ApiElements {
      * @returns An ordered list of parameters or null if none found.
      */
     _computeUrlParams(url: String|null): any[]|null;
-    fire(type: any, detail: any, options: any): any;
+    fire(type: any, detail: any): any;
   }
 }
 
