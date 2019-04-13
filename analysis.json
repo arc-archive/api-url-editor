@@ -7,53 +7,6 @@
       "path": "api-url-editor.js",
       "properties": [
         {
-          "name": "eventsTarget",
-          "type": "Object | null | undefined",
-          "description": "Events handlers target. By default the element listens on\n`window` object. If set, all events listeners will be attached to this\nobject instead of `window`.",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
-            "start": {
-              "line": 64,
-              "column": 8
-            },
-            "end": {
-              "line": 67,
-              "column": 9
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "observer": "\"_eventsTargetChanged\"",
-              "attributeType": "Object"
-            }
-          },
-          "inheritedFrom": "EventsTargetMixin"
-        },
-        {
-          "name": "_oldEventsTarget",
-          "type": "Object | null | undefined",
-          "description": "An event target used to attach listeners.",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
-            "start": {
-              "line": 69,
-              "column": 8
-            },
-            "end": {
-              "line": 69,
-              "column": 32
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "attributeType": "Object"
-            }
-          },
-          "inheritedFrom": "EventsTargetMixin"
-        },
-        {
           "name": "label",
           "type": "string | null | undefined",
           "description": "The label for this input.",
@@ -274,76 +227,24 @@
       ],
       "methods": [
         {
-          "name": "connectedCallback",
+          "name": "ready",
           "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
-            "start": {
-              "line": 72,
-              "column": 4
-            },
-            "end": {
-              "line": 75,
-              "column": 6
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "return": {
-            "type": "void"
-          },
-          "inheritedFrom": "EventsTargetMixin"
-        },
-        {
-          "name": "disconnectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
-            "start": {
-              "line": 77,
-              "column": 5
-            },
-            "end": {
-              "line": 82,
-              "column": 6
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "return": {
-            "type": "void"
-          },
-          "inheritedFrom": "EventsTargetMixin"
-        },
-        {
-          "name": "_eventsTargetChanged",
-          "description": "Removes old handlers (if any) and attaches listeners on new event\nevent target.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
             "start": {
-              "line": 90,
-              "column": 4
+              "line": 179,
+              "column": 2
             },
             "end": {
-              "line": 96,
-              "column": 5
+              "line": 186,
+              "column": 3
             }
           },
           "metadata": {},
-          "params": [
-            {
-              "name": "eventsTarget",
-              "type": "?Node",
-              "description": "Event target to set handlers on. If not set it\nwill set handlers on the `window` object."
-            }
-          ],
+          "params": [],
           "return": {
             "type": "void"
-          },
-          "inheritedFrom": "EventsTargetMixin"
+          }
         },
         {
           "name": "_attachListeners",
@@ -389,26 +290,6 @@
               "name": "node"
             }
           ],
-          "return": {
-            "type": "void"
-          }
-        },
-        {
-          "name": "ready",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 179,
-              "column": 2
-            },
-            "end": {
-              "line": 186,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
           "return": {
             "type": "void"
           }
@@ -1057,24 +938,6 @@
       "superclass": "_base",
       "name": "ApiElements.ApiUrlEditor",
       "attributes": [
-        {
-          "name": "events-target",
-          "description": "Events handlers target. By default the element listens on\n`window` object. If set, all events listeners will be attached to this\nobject instead of `window`.",
-          "sourceRange": {
-            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
-            "start": {
-              "line": 64,
-              "column": 8
-            },
-            "end": {
-              "line": 67,
-              "column": 9
-            }
-          },
-          "metadata": {},
-          "type": "Object | null | undefined",
-          "inheritedFrom": "EventsTargetMixin"
-        },
         {
           "name": "label",
           "description": "The label for this input.",
