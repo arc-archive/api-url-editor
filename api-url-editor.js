@@ -1,12 +1,12 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {PaperInputBehavior} from '@polymer/paper-input/paper-input-behavior.js';
-import {IronValidatableBehavior} from '@polymer/iron-validatable-behavior/iron-validatable-behavior.js';
-import {EventsTargetMixin} from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
-import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-import '@polymer/paper-input/paper-input-container.js';
-import '@polymer/paper-input/paper-input-error.js';
-import '@polymer/iron-input/iron-input.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {PaperInputBehavior} from '../../@polymer/paper-input/paper-input-behavior.js';
+import {IronValidatableBehavior} from '../../@polymer/iron-validatable-behavior/iron-validatable-behavior.js';
+import {EventsTargetMixin} from '../../@advanced-rest-client/events-target-mixin/events-target-mixin.js';
+import {mixinBehaviors} from '../../@polymer/polymer/lib/legacy/class.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import '../../@polymer/paper-input/paper-input-container.js';
+import '../../@polymer/paper-input/paper-input-error.js';
+import '../../@polymer/iron-input/iron-input.js';
 
 const _inputBehavior2 = !(PaperInputBehavior instanceof Array);
 const _behaviorsQueue = [];
