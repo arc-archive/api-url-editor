@@ -1,30 +1,8 @@
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {PaperInputBehavior} from '../../@polymer/paper-input/paper-input-behavior.js';
-import {IronValidatableBehavior} from '../../@polymer/iron-validatable-behavior/iron-validatable-behavior.js';
-import {EventsTargetMixin} from '../../@advanced-rest-client/events-target-mixin/events-target-mixin.js';
-import {mixinBehaviors} from '../../@polymer/polymer/lib/legacy/class.js';
-import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
-import '../../@polymer/paper-input/paper-input-container.js';
-import '../../@polymer/paper-input/paper-input-error.js';
-import '../../@polymer/iron-input/iron-input.js';
+import { html, css, LitElement } from 'lit-element';
+import { ValidatableMixin } from '@anypoint-web-components/validatable-mixin/validatable-mixin.js';
+import { EventsTargetMixin } from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
+import '@anypoint-web-components/anypoint-input/anypoint-input.js';
 
-const _inputBehavior2 = !(PaperInputBehavior instanceof Array);
-const _behaviorsQueue = [];
-let _base = EventsTargetMixin(PolymerElement);
-if (_inputBehavior2) {
-  // API console with Anypoint styling has its own implementation of
-  // paper input behavior which is for Polymer 2 only.
-  _base = PaperInputBehavior(_base);
-} else {
-  _behaviorsQueue.push(PaperInputBehavior);
-}
-
-_behaviorsQueue.push(IronValidatableBehavior);
-// if (!Polymer.IronValidatableMixin) {
-// } else {
-//   _base = Polymer.IronValidatableMixin(_base);
-// }
-_base = mixinBehaviors(_behaviorsQueue, _base);
 /**
  * `api-url-editor`
  * An AMF powered url editor for the HTTP request editor.
@@ -36,154 +14,264 @@ _base = mixinBehaviors(_behaviorsQueue, _base);
  * @customElement
  * @polymer
  * @demo demo/index.html
- * @polymerBehavior Polymer.PaperInputBehavior
- * @polymerBehavior Polymer.IronValidatableBehavior
  * @appliesMixin EventsTargetMixin
+ * @appliesMixin ValidatableMixin
  * @memberof ApiElements
  */
-class ApiUrlEditor extends _base {
-  static get template() {
+class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
+  static get styles() {
+    return css`:host {
+      display: flex;
+    }
+
+    anypoint-input {
+      flex: 1;
+    }`;
+  }
+
+  render() {
+    const {
+      noLabelFloat,
+      disabled,
+      readOnly,
+      invalid,
+      outlined,
+      legacy,
+      value,
+      required
+    } = this;
     return html`
-    <style>
-    :host {
-      outline: none;
-      display: block;
-      @apply --api-url-editor;
-    }
-
-    input {
-      @apply --paper-input-container-shared-input-style;
-      @apply --paper-input-container-input-input-style;
-    }
-
-    label {
-      pointer-events: none;
-    }
-
-    .markdown-body * {
-      font-size: 13px !important;
-    }
-
-    .markdown-body p:first-child {
-      margin-top: 0;
-      padding-top: 0;
-    }
-
-    .markdown-body p:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    </style>
-    <paper-input-container no-label-float="[[noLabelFloat]]" always-float-label="[[alwaysFloatLabel]]"
-      auto-validate\$="[[autoValidate]]" disabled\$="[[disabled]]" invalid="[[invalid]]">
-      <label hidden\$="[[!label]]" slot="label">[[label]]</label>
-      <iron-input id\$="[[_inputId]]" bind-value="{{value}}" slot="input" invalid="{{invalid}}">
-        <input aria-labelledby\$="[[_ariaLabelledBy]]" aria-describedby\$="[[_ariaDescribedBy]]"
-          disabled\$="[[disabled]]" title\$="[[title]]" type="url" required\$="[[required]]"
-          autocomplete\$="[[autocomplete]]" autofocus\$="[[autofocus]]" inputmode\$="[[inputmode]]"
-          name\$="[[name]]" placeholder\$="[[placeholder]]" readonly\$="[[readonly]]" list\$="[[list]]"
-          autocapitalize\$="[[autocapitalize]]" autocorrect\$="[[autocorrect]]"
-          on-change="_onChange" on-blur="_onElementBlur" on-input="__userInputHandler"
-          tabindex\$="[[tabIndex]]" autosave\$="[[autosave]]">
-      </iron-input>
-      <template is="dom-if" if="[[invalid]]">
-        <paper-input-error slot="add-on" invalid="">[[errorMessage]]</paper-input-error>
-      </template>
-    </paper-input-container>
-`;
+    <anypoint-input
+      ?nolabelfloat="${noLabelFloat}"
+      ?disabled="${disabled}"
+      ?readonly="${readOnly}"
+      ?invalid="${invalid}"
+      ?outlined="${outlined}"
+      ?legacy="${legacy}"
+      ?required="${required}"
+      invalidmessage="The URL is invalid"
+      type="url"
+      .value="${value}"
+      @blur="${this._onElementBlur}"
+      @input="${this.__userInputHandler}">
+      <label slot="label">Request URL</label>
+    </anypoint-input>`;
   }
 
-  static get is() {
-    return 'api-url-editor';
+  get inputElement() {
+    return this.shadowRoot.querySelector('anypoint-input');
   }
+
   static get properties() {
     return {
       /**
-       * The label for this input.
+       * When set the input label won't float when focused/has input
        */
-      label: {
-        type: String,
-        value: 'Request URL'
-      },
-      // A value generated by this editor - the URL.
-      value: {
-        type: String,
-        notify: true,
-        observer: '_onValueChanged'
-      },
-      // An error message to display
-      errorMessage: {
-        type: String,
-        value: 'The URL is invalid'
-      },
+      noLabelFloat: { type: Boolean },
+      /**
+       * Renders input element disabled.
+       */
+      disabled: { type: Boolean },
+      /**
+       * When set the input is marked as required input.
+       */
+      required: { type: Boolean },
+      /**
+       * Makes the input element read only.
+       */
+      readOnly: { type: Boolean },
+      /**
+       * A value produced by this editor - the URL.
+       */
+      value: { type: String },
       /**
        * Value or RAML's base URI property.
        *
        * Note, the element doesn't check if `baseUri` is relative or not.
        * Hosting application have to take care of that.
        */
-      baseUri: String,
+      baseUri: { type: String },
       /**
        * Currently selected endpoint relative URI.
        * It is available in RAML definition.
        */
-      endpointPath: String,
-      // Computed value, sum of `baseUri` and `endpointPath`
-      _fullUri: {
-        computed: '_computeFullUrl(baseUri, endpointPath)'
-      },
+      endpointPath: { type: String },
       /**
-       * Computed query properties model.
+       * Computed value, sum of `baseUri` and `endpointPath`
+       */
+      _fullUri: { type: String },
+      /**
+       * The query properties model.
        * Use `api-url-data-model` to compute model for the view.
        */
-      queryModel: {
-        type: Array,
-        notify: true
-      },
+      queryModel: { type: Array },
       /**
-       * Computed URI properties model.
+       * The URI properties model.
        * Use `api-url-data-model` to compute model for the view.
        */
-      pathModel: {
-        type: Array,
-        notify: true
-      },
+      pathModel: { type: Array },
       /**
        * Computed, ordered list of URL variables in the URI string.
        */
-      urlParams: {
-        type: Array,
-        computed: '_computeUrlParams(_fullUri)'
-      },
+      _urlParams: { type: Array },
       /**
        * Computed regexp for the current `_fullUri` value to search for the
        * URI parameters.
        */
-      urlSearchRegexp: {
-        type: RegExp,
-        computed: '_computeUrlRegexp(_fullUri)'
-      }
+      _urlSearchRegexp: { type: RegExp },
+      /**
+       * Enables Anypoint legacy styling
+       */
+      legacy: { type: Boolean },
+      /**
+       * Enables Material Design outlined style
+       */
+      outlined: { type: Boolean },
     };
   }
 
-  static get observers() {
-    return [
-      '_computeValueChanged(_fullUri, queryModel.*, pathModel.*)'
-    ];
+  get value() {
+    return this._value;
+  }
+
+  set value(value) {
+    const old = this._value;
+    /* istanbul ignore if  */
+    if (old === value) {
+      return;
+    }
+    this._value = value;
+    this.requestUpdate('value', old);
+    this._onValueChanged(value);
+    this.dispatchEvent(new CustomEvent('value-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+
+  get baseUri() {
+    return this._baseUri;
+  }
+
+  set baseUri(value) {
+    const old = this._baseUri;
+    /* istanbul ignore if  */
+    if (old === value) {
+      return;
+    }
+    this._baseUri = value;
+    this._fullUri = this._computeFullUrl(value, this.endpointPath);
+  }
+
+  get endpointPath() {
+    return this._endpointPath;
+  }
+
+  set endpointPath(value) {
+    const old = this._endpointPath;
+    /* istanbul ignore if  */
+    if (old === value) {
+      return;
+    }
+    this._endpointPath = value;
+    this._fullUri = this._computeFullUrl(this.baseUri, value);
+  }
+
+  get _fullUri() {
+    return this.__fullUri;
+  }
+
+  set _fullUri(value) {
+    const old = this.__fullUri;
+    /* istanbul ignore if  */
+    if (old === value) {
+      return;
+    }
+    this.__fullUri = value;
+    this._urlParams = this._computeUrlParams(value);
+    this._urlSearchRegexp = this._computeUrlRegexp(value);
+    this._computeValue(this.queryModel, this.pathModel, value);
+  }
+
+  get queryModel() {
+    return this._queryModel;
+  }
+
+  set queryModel(value) {
+    const old = this._queryModel;
+    /* istanbul ignore if  */
+    if (old === value) {
+      return;
+    }
+    this._queryModel = value;
+    this._computeValue(value, this.pathModel, this._fullUri);
+    this.dispatchEvent(new CustomEvent('querymodel-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+
+  get pathModel() {
+    return this._pathModel;
+  }
+
+  set pathModel(value) {
+    const old = this._pathModel;
+    /* istanbul ignore if  */
+    if (old === value) {
+      return;
+    }
+    this._pathModel = value;
+    this._computeValue(this.queryModel, value, this._fullUri);
+    this.dispatchEvent(new CustomEvent('pathmodel-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+  /**
+   * @return {Function} Previously registered handler for `value-changed` event
+   */
+  get onvalue() {
+    return this['_onvalue-changed'];
+  }
+  /**
+   * Registers a callback function for `value-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onvalue(value) {
+    this._registerCallback('value-changed', value);
   }
 
   constructor() {
     super();
     this._extValueChangedHandler = this._extValueChangedHandler.bind(this);
+    this._focusHandler = this._focusHandler.bind(this);
   }
 
-  ready() {
-    super.ready();
+  firstUpdated() {
     this._elementReady = true;
     // If there's an initial input, validate it.
     if (this.value) {
-      this._handleAutoValidate();
+      this.validate();
     }
+  }
+
+  connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+    this.addEventListener('focus', this._focusHandler);
+  }
+
+  disconnectedCallback() {
+    if (super.disconnectedCallback) {
+      super.disconnectedCallback();
+    }
+    this.removeEventListener('focus', this._focusHandler);
   }
 
   _attachListeners(node) {
@@ -194,6 +282,29 @@ class ApiUrlEditor extends _base {
     node.removeEventListener('url-value-changed', this._extValueChangedHandler);
   }
 
+  _focusHandler() {
+    const node = this.inputElement;
+    if (node) {
+      node.inputElement.focus();
+    }
+  }
+  /**
+   * Registers an event handler for given type
+   * @param {String} eventType Event type (name)
+   * @param {Function} value The handler to register
+   */
+  _registerCallback(eventType, value) {
+    const key = `_on${eventType}`;
+    if (this[key]) {
+      this.removeEventListener(eventType, this[key]);
+    }
+    if (typeof value !== 'function') {
+      this[key] = null;
+      return;
+    }
+    this[key] = value;
+    this.addEventListener(eventType, value);
+  }
   /**
    * Computes endpoint's full URI with (possibly) variables in it.
    *
@@ -216,13 +327,6 @@ class ApiUrlEditor extends _base {
     }
     return baseUri + endpointPath;
   }
-
-  _computeValueChanged(_fullUri, queryRecord, uriRecord) {
-    if (this.__ignoreValueChange) {
-      return;
-    }
-    this._computeValue(queryRecord.base, uriRecord.base, _fullUri);
-  }
   /**
    * Computes url value from current `baseUri` and query/uri models.
    *
@@ -232,12 +336,12 @@ class ApiUrlEditor extends _base {
    */
   _computeValue(queryModel, pathModel, uri) {
     if (!uri) {
-      this.set('value', undefined);
+      this.value = '';
       return;
     }
     uri = this._applyUriParams(uri, pathModel);
     uri = this._applyQueryParams(uri, queryModel);
-    this.set('value', uri);
+    this.value = uri;
   }
   /**
    * Creates a map of serialized values from a model.
@@ -361,7 +465,7 @@ class ApiUrlEditor extends _base {
    */
   _computeQueryItems(params) {
     const items = [];
-    for (let [name, value] of params) {
+    for (const [name, value] of params) {
       if (value === undefined) {
         continue;
       }
@@ -417,8 +521,8 @@ class ApiUrlEditor extends _base {
       return '';
     }
     return encodeURIComponent(str.toString()
-      .replace(/\r?\n/g, '\r\n'))
-      .replace(/%20/g, '+');
+        .replace(/\r?\n/g, '\r\n'))
+        .replace(/%20/g, '+');
   }
   /**
    * Updates URI / query parameters model from user input.
@@ -428,8 +532,8 @@ class ApiUrlEditor extends _base {
   __userInputHandler(e) {
     const value = e.target.value;
     let matches;
-    const uriParams = this.urlParams;
-    const uriRegexp = this.urlSearchRegexp;
+    const uriParams = this._urlParams;
+    const uriRegexp = this._urlSearchRegexp;
     if (uriParams && uriRegexp) {
       matches = value.match(uriRegexp);
       if (matches) {
@@ -438,12 +542,14 @@ class ApiUrlEditor extends _base {
       }
     }
     const matchesNew = value.match(/[^&?]*?=[^&?]*/g);
-    if (!matchesNew) {
-      return;
+    if (matchesNew) {
+      const params = {};
+      matchesNew.forEach((item) => this._applyQueryParamToObject(item, params));
+      this._applyQueryParamsValues(params);
     }
-    const params = {};
-    matchesNew.forEach((item) => this._applyQueryParamToObject(item, params));
-    this._applyQueryParamsValues(params);
+
+    this.value = value;
+    this.validate();
   }
   /**
    * Applies query parameter values to an object.
@@ -476,14 +582,24 @@ class ApiUrlEditor extends _base {
    * @param {Array<String>} names List of variables names (uri parameters).
    */
   _applyUriValues(values, names) {
+    let changed = false;
     for (let i = 0, len = names.length; i < len; i++) {
+      const value = values[i];
+      if (value && value[0] === '{') {
+        // This is still a variable
+        continue;
+      }
       const name = names[i];
       const index = this._findModelIndex(name, 'path');
       if (index !== -1) {
-        this.__ignoreValueChange = true;
-        this.set(['pathModel', index, 'value'], values[i]);
-        this.__ignoreValueChange = false;
+        if (this.pathModel[index].value !== value) {
+          this.pathModel[index].value = value;
+          changed = true;
+        }
       }
+    }
+    if (changed) {
+      this.pathModel = [...this.pathModel];
     }
   }
   /**
@@ -497,14 +613,25 @@ class ApiUrlEditor extends _base {
       return;
     }
     const keys = Object.keys(map);
+    let changed = false;
     keys.forEach((key) => {
+      const value = map[key];
+      if (value && value[0] === '{') {
+        // This is still a variable
+        return;
+      }
       const index = this._findModelIndex(key, 'query');
       if (index !== -1) {
-        this.__ignoreValueChange = true;
-        this.set(['queryModel', index, 'value'], map[key]);
-        this.__ignoreValueChange = false;
+        if (this.queryModel[index].value !== value) {
+          this.queryModel[index].value = value;
+          changed = true;
+        }
       }
     });
+    if (changed) {
+      this.queryModel = [...this.queryModel];
+      changed = true;
+    }
   }
 
   _findModelIndex(name, type) {
@@ -524,11 +651,11 @@ class ApiUrlEditor extends _base {
     this.fire('url-value-changed', {
       value: this.value
     });
-    this._handleAutoValidate();
+    this.validate();
   }
 
   _onElementBlur() {
-    this._handleAutoValidate();
+    this.validate();
   }
   /**
    * A handler for the `url-value-changed` event.
@@ -542,16 +669,16 @@ class ApiUrlEditor extends _base {
       return;
     }
     this.__cancelValueChange = true;
-    this.set('value', e.detail.value);
+    this.value = e.detail.value;
     this.__cancelValueChange = false;
   }
 
   _getValidity() {
     const value = this.value;
-    if (!this.required && !value) {
+    if (value === undefined) {
       return true;
     }
-    if (value === undefined) {
+    if (!this.required && !value) {
       return true;
     }
     if (!value && this.required) {
@@ -560,13 +687,16 @@ class ApiUrlEditor extends _base {
     if (!value) {
       return true;
     }
+    if (typeof value !== 'string') {
+      return false;
+    }
     if (value.indexOf('{') !== -1 && value.indexOf('}') !== -1) {
       return false;
     }
     if (!this.shadowRoot) {
       return true;
     }
-    return this.shadowRoot.querySelector('input').validity.valid;
+    return this.inputElement.validate();
   }
   /**
    * Creates a regular expression from the `_fullUri` to match the
@@ -579,8 +709,10 @@ class ApiUrlEditor extends _base {
     if (!url) {
       return null;
     }
+    url = url.replace('?', '\\?');
     url = url.replace(/(\.|\/)/g, '\\$1');
-    url = url.replace(/{\w+}/g, '([a-zA-Z0-9\\$\\-_\\.~\\+!\'\\(\\)\\*]+)');
+    url = url.replace(/{[\w\\+]+}/g, '([a-zA-Z0-9\\$\\-_\\.~\\+!\'\\(\\)\\*\\{\\}]+)');
+    url += '.*';
     return new RegExp(url);
   }
   /**
@@ -602,7 +734,7 @@ class ApiUrlEditor extends _base {
     if (!url) {
       return null;
     }
-    let paramsNames = url.match(/\{\w+\}/g);
+    let paramsNames = url.match(/\{[\w\\+]+\}/g);
     if (paramsNames) {
       paramsNames = paramsNames.map((item) => item.substr(1, item.length - 2));
     }
@@ -621,4 +753,4 @@ class ApiUrlEditor extends _base {
   }
 }
 
-window.customElements.define(ApiUrlEditor.is, ApiUrlEditor);
+window.customElements.define('api-url-editor', ApiUrlEditor);

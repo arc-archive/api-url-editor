@@ -270,7 +270,9 @@
 {
 "@id": "#162",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -306,7 +308,9 @@
 {
 "@id": "#163",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -342,7 +346,9 @@
 {
 "@id": "#164",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -891,6 +897,18 @@
 "@value": "[(51,4)-(59,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#57"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(51,0)-(59,0)]"
+}
+]
 }
 ]
 }
@@ -1134,6 +1152,18 @@
 "@value": "[(72,6)-(76,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#64"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(72,0)-(76,0)]"
+}
+]
 }
 ]
 }
@@ -1233,7 +1263,9 @@
 {
 "@id": "#72",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1269,7 +1301,9 @@
 {
 "@id": "#73",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1305,7 +1339,9 @@
 {
 "@id": "#74",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1610,7 +1646,9 @@
 {
 "@id": "#80",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1663,7 +1701,9 @@
 {
 "@id": "#81",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1961,7 +2001,9 @@
 {
 "@id": "#85",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2014,7 +2056,9 @@
 {
 "@id": "#86",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2254,7 +2298,7 @@
 ],
 "schema-org:description": [
 {
-"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page."
 }
 ],
 "hydra:required": [
@@ -2298,7 +2342,7 @@
 ],
 "schema-org:description": [
 {
-"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page."
 }
 ],
 "doc:examples": [
@@ -2317,7 +2361,9 @@
 {
 "@id": "#90",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2551,6 +2597,18 @@
 "sourcemaps:element": [
 {
 "@value": "raml-http:parameter"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,4)-(45,31)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#77"
 }
 ],
 "sourcemaps:value": [
@@ -2816,7 +2874,9 @@
 {
 "@id": "#7",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2852,7 +2912,9 @@
 {
 "@id": "#8",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2888,7 +2950,9 @@
 {
 "@id": "#9",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2924,7 +2988,9 @@
 {
 "@id": "#10",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2960,7 +3026,9 @@
 {
 "@id": "#11",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -3174,7 +3242,9 @@
 {
 "@id": "#14",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -3719,6 +3789,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(93,4)-(95,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#95"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(93,0)-(95,0)]"
 }
 ]
 }
@@ -4402,7 +4484,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:auto-generated-name": [
 {
 "sourcemaps:element": [
 {
@@ -4411,7 +4493,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,10)-(22,14)]"
+"@value": ""
 }
 ]
 }
@@ -4426,6 +4508,20 @@
 "sourcemaps:value": [
 {
 "@value": "[(21,8)-(30,0)]"
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#25"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,10)-(22,14)]"
 }
 ]
 }
@@ -5218,7 +5314,9 @@
 {
 "@id": "#113",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -5271,7 +5369,9 @@
 {
 "@id": "#114",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -5569,7 +5669,9 @@
 {
 "@id": "#117",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -5622,7 +5724,9 @@
 {
 "@id": "#118",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -5862,7 +5966,7 @@
 ],
 "schema-org:description": [
 {
-"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page."
 }
 ],
 "hydra:required": [
@@ -5906,7 +6010,7 @@
 ],
 "schema-org:description": [
 {
-"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page."
 }
 ],
 "doc:examples": [
@@ -5925,7 +6029,9 @@
 {
 "@id": "#121",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -6164,6 +6270,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(105,8)-(108,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#106"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(104,0)-(108,0)]"
 }
 ]
 }
@@ -6465,7 +6583,9 @@
 {
 "@id": "#133",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -6518,7 +6638,9 @@
 {
 "@id": "#134",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -6816,7 +6938,9 @@
 {
 "@id": "#137",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -6869,7 +6993,9 @@
 {
 "@id": "#138",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -7109,7 +7235,7 @@
 ],
 "schema-org:description": [
 {
-"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page."
 }
 ],
 "hydra:required": [
@@ -7153,7 +7279,7 @@
 ],
 "schema-org:description": [
 {
-"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+"@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page."
 }
 ],
 "doc:examples": [
@@ -7172,7 +7298,9 @@
 {
 "@id": "#141",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -7522,7 +7650,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:auto-generated-name": [
 {
 "sourcemaps:element": [
 {
@@ -7531,7 +7659,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(114,14)-(114,18)]"
+"@value": ""
 }
 ]
 }
@@ -7546,6 +7674,20 @@
 "sourcemaps:value": [
 {
 "@value": "[(113,12)-(117,0)]"
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#128"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(114,14)-(114,18)]"
 }
 ]
 }
@@ -7594,6 +7736,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(112,10)-(117,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#126"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(112,0)-(124,0)]"
 }
 ]
 }
@@ -7746,7 +7900,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:auto-generated-name": [
 {
 "sourcemaps:element": [
 {
@@ -7755,7 +7909,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(121,18)-(121,22)]"
+"@value": ""
 }
 ]
 }
@@ -7770,6 +7924,20 @@
 "sourcemaps:value": [
 {
 "@value": "[(120,16)-(124,0)]"
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#144"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(121,18)-(121,22)]"
 }
 ]
 }
@@ -8090,7 +8258,9 @@
 {
 "@id": "#7",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -8126,7 +8296,9 @@
 {
 "@id": "#8",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -8162,7 +8334,9 @@
 {
 "@id": "#9",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -8198,7 +8372,9 @@
 {
 "@id": "#10",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -8234,7 +8410,9 @@
 {
 "@id": "#11",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -8448,7 +8626,9 @@
 {
 "@id": "#14",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -9613,7 +9793,9 @@
 {
 "@id": "#7",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -9649,7 +9831,9 @@
 {
 "@id": "#8",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -9685,7 +9869,9 @@
 {
 "@id": "#9",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -9721,7 +9907,9 @@
 {
 "@id": "#10",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -9757,7 +9945,9 @@
 {
 "@id": "#11",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -9971,7 +10161,9 @@
 {
 "@id": "#14",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11001,7 +11193,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:auto-generated-name": [
 {
 "sourcemaps:element": [
 {
@@ -11010,7 +11202,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,10)-(22,14)]"
+"@value": ""
 }
 ]
 }
@@ -11025,6 +11217,20 @@
 "sourcemaps:value": [
 {
 "@value": "[(21,8)-(30,0)]"
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#25"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,10)-(22,14)]"
 }
 ]
 }
@@ -11232,25 +11438,33 @@
 {
 "@id": "#31",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:queryParameters": [
 {
 "@id": "#32",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:limit": [
 {
 "@id": "#33",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:default": [
 {
 "@id": "#34",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11286,7 +11500,9 @@
 {
 "@id": "#35",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11322,7 +11538,9 @@
 {
 "@id": "#36",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11358,7 +11576,9 @@
 {
 "@id": "#37",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11394,7 +11614,9 @@
 {
 "@id": "#38",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11430,7 +11652,9 @@
 {
 "@id": "#39",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11486,12 +11710,84 @@
 {
 "sourcemaps:element": [
 {
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(25,14)-(25,20)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:maximum"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(27,17)-(27,20)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,21)-(26,47)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#33"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(25,0)-(31,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:default"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(30,17)-(30,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:example"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(29,17)-(29,20)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:minimum"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(28,17)-(28,18)]"
 }
 ]
 }
@@ -11504,13 +11800,17 @@
 {
 "@id": "#40",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:description": [
 {
 "@id": "#41",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11546,7 +11846,9 @@
 {
 "@id": "#42",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11582,7 +11884,9 @@
 {
 "@id": "#43",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11618,7 +11922,9 @@
 {
 "@id": "#44",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11654,7 +11960,9 @@
 {
 "@id": "#45",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11710,12 +12018,72 @@
 {
 "sourcemaps:element": [
 {
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,14)-(38,20)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:example"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(39,17)-(39,48)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(40,21)-(44,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#40"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(38,0)-(46,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:displayName"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(45,21)-(45,31)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:pattern"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(44,17)-(44,31)]"
 }
 ]
 }
@@ -11728,13 +12096,17 @@
 {
 "@id": "#46",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:default": [
 {
 "@id": "#47",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11770,7 +12142,9 @@
 {
 "@id": "#48",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11806,7 +12180,9 @@
 {
 "@id": "#49",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11842,7 +12218,9 @@
 {
 "@id": "#50",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11878,7 +12256,9 @@
 {
 "@id": "#51",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -11934,12 +12314,72 @@
 {
 "sourcemaps:element": [
 {
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(32,14)-(32,20)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:example"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(35,17)-(35,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:default"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,17)-(36,18)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#46"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(32,0)-(37,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(33,21)-(33,48)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:minimum"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(34,17)-(34,18)]"
 }
 ]
 }
@@ -11958,6 +12398,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "data:start"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "description->[(33,8)-(34,0)]#default->[(36,8)-(37,0)]#minimum->[(34,8)-(35,0)]#type->[(32,8)-(33,0)]#example->[(35,8)-(36,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:limit"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "description->[(26,8)-(27,0)]#maximum->[(27,8)-(28,0)]#default->[(30,8)-(31,0)]#minimum->[(28,8)-(29,0)]#type->[(25,8)-(26,0)]#example->[(29,8)-(30,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#32"
 }
 ],
@@ -11966,9 +12430,45 @@
 "@value": "limit->[(24,6)-(31,0)]#nextPageToken->[(37,6)-(46,0)]#start->[(31,6)-(37,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:nextPageToken"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "displayName->[(45,8)-(46,0)]#pattern->[(44,8)-(45,0)]#description->[(40,8)-(44,0)]#type->[(38,8)-(39,0)]#example->[(39,8)-(40,0)]"
+}
+]
 }
 ],
 "sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:start"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(32,0)-(37,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:limit"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(25,0)-(31,0)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -11978,6 +12478,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(24,0)-(46,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:nextPageToken"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,0)-(46,0)]"
 }
 ]
 }
@@ -11996,6 +12508,18 @@
 {
 "sourcemaps:element": [
 {
+"@value": "data:queryParameters"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "limit->[(24,6)-(31,0)]#nextPageToken->[(37,6)-(46,0)]#start->[(31,6)-(37,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#31"
 }
 ],
@@ -12007,6 +12531,18 @@
 }
 ],
 "sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:queryParameters"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(24,0)-(46,0)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -12286,7 +12822,9 @@
 {
 "@id": "#7",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -12322,7 +12860,9 @@
 {
 "@id": "#8",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -12358,7 +12898,9 @@
 {
 "@id": "#9",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -12394,7 +12936,9 @@
 {
 "@id": "#10",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -12430,7 +12974,9 @@
 {
 "@id": "#11",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -12644,7 +13190,9 @@
 {
 "@id": "#14",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -13661,7 +14209,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:auto-generated-name": [
 {
 "sourcemaps:element": [
 {
@@ -13670,7 +14218,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,10)-(22,14)]"
+"@value": ""
 }
 ]
 }
@@ -13685,6 +14233,20 @@
 "sourcemaps:value": [
 {
 "@value": "[(21,8)-(30,0)]"
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#25"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,10)-(22,14)]"
 }
 ]
 }
