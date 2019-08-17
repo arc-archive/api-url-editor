@@ -19,6 +19,14 @@ describe('<api-url-editor>', function() {
     return (await fixture(`<api-url-editor baseuri="https://domain.com" endpointpath="/{path}"></api-url-editor>`));
   }
 
+  async function valueFixture() {
+    return (await fixture(`<api-url-editor value="https://domain.com/api/path"></api-url-editor>`));
+  }
+
+  async function invalidFixture() {
+    return (await fixture(`<api-url-editor value="https://domain.com/{path}" invalid></api-url-editor>`));
+  }
+
   const BASE_URI = 'https://{base}.domain.com';
 
   describe('Basic computations', () => {
@@ -785,6 +793,23 @@ describe('<api-url-editor>', function() {
     it('ignores model change when no new parameters', () => {
       target.dispatchEvent(new CustomEvent('input'));
       assert.isTrue(queryModel === element.queryModel);
+    });
+  });
+
+  describe('a11y', () => {
+    it('is accessible without a value', async () => {
+      const element = await basicFixture();
+      await assert.isAccessible(element);
+    });
+
+    it('is accessible with a value', async () => {
+      const element = await valueFixture();
+      await assert.isAccessible(element);
+    });
+
+    it('is accessible when invalid', async () => {
+      const element = await invalidFixture();
+      await assert.isAccessible(element);
     });
   });
 });
