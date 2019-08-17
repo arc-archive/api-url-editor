@@ -55,3 +55,7 @@
 
 
 
+# [3.0.0](https://github.com/advanced-rest-client/api-url-editor/compare/2.0.7...3.0.0) (2019-08-17)
+
+
+
