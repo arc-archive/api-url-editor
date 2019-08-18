@@ -100,7 +100,7 @@ import '@api-components/api-url-data-model/api-url-data-model.js';
   model.amf = api; // This is required to compute ld+json keys!
   model.selected = selectedEndpoint;
 
-  const editor = document.querySelector('api-editor');
+  const editor = document.querySelector('api-url-editor');
   editor.baseUri = model.apiBaseUri;
   editor.endpointPath = model.endpointPath;
   editor.queryModel = model.queryModel;
