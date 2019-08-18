@@ -6,7 +6,7 @@
 
 An AMF powered URL editor for the HTTP request editor.
 
-It uses `@api-components/api-url-editor` to transform AMF model to the view model recognized by this element.
+It uses [api-url-data-model](https://github.com/advanced-rest-client/api-url-data-model) to transform AMF model to the view model recognized by this element.
 
 ```html
 <api-url-editor
