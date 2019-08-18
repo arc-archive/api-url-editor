@@ -21,7 +21,7 @@ It uses `@api-components/api-url-editor` to transform AMF model to the view mode
 
 ### Installation
 ```
-npm install --save @api-components/api-url-editor @api-components/api-url-editor
+npm install --save @api-components/api-url-editor
 ```
 
 ### In an html file
