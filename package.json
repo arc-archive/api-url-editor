@@ -31,7 +31,7 @@
     "@advanced-rest-client/arc-demo-helper": "^1.0.14",
     "@advanced-rest-client/eslint-config": "^1.1.0",
     "@advanced-rest-client/prettier-config": "^0.1.0",
-    "@advanced-rest-client/testing-karma-sl": "^1.0.3",
+    "@advanced-rest-client/testing-karma-sl": "^1.0.4",
     "@anypoint-web-components/anypoint-checkbox": "^1.0.1",
     "@anypoint-web-components/anypoint-dropdown-menu": "^0.1.9",
     "@anypoint-web-components/anypoint-item": "^1.0.2",
