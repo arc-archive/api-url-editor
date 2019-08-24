@@ -334,7 +334,7 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
    * @param {Array} pathModel Uri parameters model.
    * @param {String} uri Current endpoint uri.
    */
-  _computeValue(queryModel, pathModel, uri) {
+  async _computeValue(queryModel, pathModel, uri) {
     if (!uri) {
       this.value = '';
       return;
@@ -342,6 +342,8 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
     uri = this._applyUriParams(uri, pathModel);
     uri = this._applyQueryParams(uri, queryModel);
     this.value = uri;
+    await this.updateComplete;
+    this.validate();
   }
   /**
    * Creates a map of serialized values from a model.
