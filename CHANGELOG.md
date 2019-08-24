@@ -68,3 +68,12 @@
 
 
 
+## [3.0.1](https://github.com/advanced-rest-client/api-url-editor/compare/2.0.7...3.0.1) (2019-08-24)
+
+
+### Bug Fixes
+
+* fixing installation command in readme ([28b15b5](https://github.com/advanced-rest-client/api-url-editor/commit/28b15b5))
+
+
+
