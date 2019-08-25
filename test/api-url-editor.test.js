@@ -1,10 +1,11 @@
 import {
   fixture,
   assert,
-  nextFrame
+  nextFrame,
+  html
 } from '@open-wc/testing';
 import '../api-url-editor.js';
-import sinon from 'sinon/pkg/sinon-esm.js';
+import * as sinon from 'sinon/pkg/sinon-esm.js';
 
 describe('<api-url-editor>', function() {
   async function basicFixture() {
@@ -793,6 +794,124 @@ describe('<api-url-editor>', function() {
     it('ignores model change when no new parameters', () => {
       target.dispatchEvent(new CustomEvent('input'));
       assert.isTrue(queryModel === element.queryModel);
+    });
+  });
+
+  describe('events API', () => {
+    async function basicFixture() {
+      const base = 'https://{c}.domain.com';
+      const endpoint = '/api';
+      const queryModel = [{
+        name: 'a',
+        value: 'b',
+        required: true,
+        schema: { enabled: true }
+      }];
+      const pathModel = [{
+        name: 'c',
+        value: 'd',
+        required: true,
+        schema: { enabled: true }
+      }];
+      const value = base + endpoint;
+      return await fixture(html`
+        <api-url-editor
+        .queryModel="${queryModel}"
+        .pathModel="${pathModel}"
+        .endpointPath="${endpoint}"
+        .value="${value}"></api-url-editor>
+      `);
+    }
+
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('updates path model value from uri-parameter-changed event', () => {
+      document.body.dispatchEvent( new CustomEvent('uri-parameter-changed', {
+        detail: { name: 'c', value: 'updated' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.equal(element.pathModel[0].value, 'updated');
+    });
+
+    it('adds unknown path parameters', () => {
+      document.body.dispatchEvent( new CustomEvent('uri-parameter-changed', {
+        detail: { name: 'e', value: 'new' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.lengthOf(element.pathModel, 2, 'has 2 model items');
+      assert.equal(element.pathModel[1].name, 'e', 'has new name');
+      assert.equal(element.pathModel[1].value, 'new', 'has new value');
+    });
+
+    it('updates query model value from query-parameter-changed event', () => {
+      document.body.dispatchEvent( new CustomEvent('query-parameter-changed', {
+        detail: { name: 'a', value: 'updated' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.equal(element.queryModel[0].value, 'updated');
+    });
+
+    it('adds unknown query parameters', () => {
+      document.body.dispatchEvent( new CustomEvent('query-parameter-changed', {
+        detail: { name: 'e', value: 'new' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.lengthOf(element.queryModel, 2, 'has 2 model items');
+      assert.equal(element.queryModel[1].name, 'e', 'has new name');
+      assert.equal(element.queryModel[1].value, 'new', 'has new value');
+    });
+
+    it('ignores the event when isCustom is set', () => {
+      document.body.dispatchEvent( new CustomEvent('query-parameter-changed', {
+        detail: { name: 'e', value: 'new', isCustom: true },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.lengthOf(element.queryModel, 1, 'has 1 model item');
+    });
+
+    it('ignores adding an item when removed is set', () => {
+      document.body.dispatchEvent( new CustomEvent('query-parameter-changed', {
+        detail: { name: 'e', removed: true },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.lengthOf(element.queryModel, 1, 'has 1 model item');
+    });
+
+    it('ignores updating an item when value is set', () => {
+      const spy = sinon.spy();
+      element.addEventListener('pathmodel-changed', spy);
+      document.body.dispatchEvent( new CustomEvent('query-parameter-changed', {
+        detail: { name: 'a', value: 'b' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.isFalse(spy.called);
+    });
+
+    it('removes an item when removed is set', () => {
+      document.body.dispatchEvent( new CustomEvent('query-parameter-changed', {
+        detail: { name: 'a', removed: true },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.lengthOf(element.queryModel, 0, 'has no items');
     });
   });
 

@@ -250,6 +250,8 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
     super();
     this._extValueChangedHandler = this._extValueChangedHandler.bind(this);
     this._focusHandler = this._focusHandler.bind(this);
+    this._queryParamChangeHandler = this._queryParamChangeHandler.bind(this);
+    this._uriParamChangeHandler = this._uriParamChangeHandler.bind(this);
   }
 
   firstUpdated() {
@@ -276,10 +278,14 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
 
   _attachListeners(node) {
     node.addEventListener('url-value-changed', this._extValueChangedHandler);
+    node.addEventListener('uri-parameter-changed', this._uriParamChangeHandler);
+    node.addEventListener('query-parameter-changed', this._queryParamChangeHandler);
   }
 
   _detachListeners(node) {
     node.removeEventListener('url-value-changed', this._extValueChangedHandler);
+    node.removeEventListener('uri-parameter-changed', this._uriParamChangeHandler);
+    node.removeEventListener('query-parameter-changed', this._queryParamChangeHandler);
   }
 
   _focusHandler() {
@@ -752,6 +758,87 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
     });
     this.dispatchEvent(e);
     return e;
+  }
+
+  /**
+   * Handler for the `query-parameter-changed` custom event.
+   * Updates model value from the event
+   *
+   * @param {CustomEvent} e
+   */
+  _queryParamChangeHandler(e) {
+    if (e.composedPath()[0] === this || e.defaultPrevented) {
+      return;
+    }
+    this._appyEventValues(e.detail, 'query');
+  }
+  /**
+   * Handler for the `uri-parameter-changed` custom event.
+   * Updates model value from the event
+   *
+   * @param {CustomEvent} e
+   */
+  _uriParamChangeHandler(e) {
+    if (e.composedPath()[0] === this || e.defaultPrevented) {
+      return;
+    }
+    this._appyEventValues(e.detail, 'path');
+  }
+
+  /**
+   * Applies values from the change event to a model.
+   *
+   * @param {Object} detail Detail event object
+   * @param {String} type `uri` or `query`
+   */
+  _appyEventValues(detail, type) {
+    if (detail.isCustom) {
+      // dealing with custom properties with possible name change is a mess.
+      // It won't be processed via event's API and values should be passed via
+      // queryModel.
+      return;
+    }
+    const modelPath = `${type}Model`;
+    const model = this[modelPath] || [];
+    const index = model.findIndex((item) => item.name === detail.name);
+    if (index === -1) {
+      if (detail.removed || detail.enabled === false) {
+        return;
+      }
+      const item = this._buildPropertyItem(detail.name, detail.value);
+      model.push(item);
+    } else {
+      if (detail.removed) {
+        model.splice(index, 1);
+      } else {
+        const item = model[index];
+        if (item.value === detail.value) {
+          return;
+        }
+        item.value = detail.value;
+      }
+    }
+    this[modelPath] = [...model];
+  }
+
+  _buildPropertyItem(name, value) {
+    const item = {
+      name,
+      value,
+      schema: {
+        type: 'string'
+      }
+    };
+    // api-view-model-transformer handles this event. If it's not in the DOM then it
+    // uses the base item object.
+    const e = new CustomEvent('api-property-model-build', {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: item
+    });
+    this.dispatchEvent(e);
+    return item;
   }
 }
 
