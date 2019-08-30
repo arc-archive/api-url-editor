@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-url-editor",
   "description": "An AMF powered url editor for the HTTP request editor",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "license": "Apache-2.0",
   "main": "api-url-editor.js",
   "authors": [
