@@ -36,7 +36,7 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       readOnly,
       invalid,
       outlined,
-      legacy,
+      compatibility,
       value,
       required
     } = this;
@@ -47,7 +47,7 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       ?readonly="${readOnly}"
       ?invalid="${invalid}"
       ?outlined="${outlined}"
-      ?legacy="${legacy}"
+      ?compatibility="${compatibility}"
       ?required="${required}"
       invalidmessage="The URL is invalid"
       type="url"
@@ -120,7 +120,11 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
        */
       _urlSearchRegexp: { type: RegExp },
       /**
-       * Enables Anypoint legacy styling
+       * Enables compatibility with Anypoint components.
+       */
+      compatibility: { type: Boolean },
+      /**
+       * @deprecated Use `compatibility` instead
        */
       legacy: { type: Boolean },
       /**
@@ -128,6 +132,14 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
        */
       outlined: { type: Boolean },
     };
+  }
+
+  get legacy() {
+    return this.compatibility;
+  }
+
+  set legacy(value) {
+    this.compatibility = value;
   }
 
   get value() {
