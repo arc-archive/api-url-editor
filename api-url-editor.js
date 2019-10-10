@@ -432,7 +432,7 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       if (name[0] === '+' || name[0] === '#') {
         value = encodeURI(value);
       } else {
-        value = this._wwwFormUrlEncodePiece(value);
+        value = this._wwwFormUrlEncodePiece(value, false);
       }
       const re = this._createUrlReplaceRegex(name);
       url = url.replace(re, value);
@@ -525,24 +525,27 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       return '';
     }
     const pieces = object.map((item) => {
-      return this._wwwFormUrlEncodePiece(item.name) + '=' +
-        this._wwwFormUrlEncodePiece(item.value);
+      return this._wwwFormUrlEncodePiece(item.name, true) + '=' +
+        this._wwwFormUrlEncodePiece(item.value, true);
     });
     return pieces.join('&');
   }
   /**
-   * @param {*} str A key or value to encode as x-www-form-urlencoded.
+   * @param {String} str A key or value to encode as x-www-form-urlencoded.
+   * @param {Boolean} replacePlus When set it replaces `%20` with `+`.
    * @return {string} .
    */
-  _wwwFormUrlEncodePiece(str) {
+  _wwwFormUrlEncodePiece(str, replacePlus) {
     // Spec says to normalize newlines to \r\n and replace %20 spaces with +.
     // jQuery does this as well, so this is likely to be widely compatible.
     if (!str) {
       return '';
     }
-    return encodeURIComponent(str.toString()
-        .replace(/\r?\n/g, '\r\n'))
-        .replace(/%20/g, '+');
+    let result = encodeURIComponent(str.toString().replace(/\r?\n/g, '\r\n'));
+    if (replacePlus) {
+      result = result.replace(/%20/g, '+');
+    }
+    return result;
   }
   /**
    * Updates URI / query parameters model from user input.

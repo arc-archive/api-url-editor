@@ -915,6 +915,114 @@ describe('<api-url-editor>', function() {
     });
   });
 
+  describe('_wwwFormUrlEncodePiece()', () => {
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('returns empty string when no input', () => {
+      const result = element._wwwFormUrlEncodePiece();
+      assert.equal(result, '');
+    });
+
+    it('normalizes spaces to %20', () => {
+      const result = element._wwwFormUrlEncodePiece('test value');
+      assert.equal(result, 'test%20value');
+    });
+
+    it('normalizes spaces to + with replacePlus', () => {
+      const result = element._wwwFormUrlEncodePiece('test value', true);
+      assert.equal(result, 'test+value');
+    });
+  });
+
+  describe('_wwwFormUrlEncode()', () => {
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('returns empty string when no input', () => {
+      const result = element._wwwFormUrlEncode();
+      assert.equal(result, '');
+    });
+
+    it('returns normalized query string values', () => {
+      const params = [{
+        name: 'test key',
+        value: 'test value'
+      }];
+      const result = element._wwwFormUrlEncode(params);
+      assert.equal(result, 'test+key=test+value');
+    });
+
+    it('concatenates params', () => {
+      const params = [{
+        name: 'test key',
+        value: 'test value'
+      }, {
+        name: 'a',
+        value: 'b c'
+      }];
+      const result = element._wwwFormUrlEncode(params);
+      assert.equal(result, 'test+key=test+value&a=b+c');
+    });
+  });
+
+  describe('Parts encoding', () => {
+    async function basicFixture() {
+      const base = 'https://{c}.domain.com';
+      const endpoint = '/api';
+      const queryModel = [{
+        name: 'a',
+        value: 'b',
+        required: true,
+        schema: { enabled: true }
+      }];
+      const pathModel = [{
+        name: 'c',
+        value: 'd',
+        required: true,
+        schema: { enabled: true }
+      }];
+      const value = base + endpoint;
+      return await fixture(html`
+        <api-url-editor
+        .queryModel="${queryModel}"
+        .pathModel="${pathModel}"
+        .endpointPath="${endpoint}"
+        .baseUri="${base}"
+        .value="${value}"></api-url-editor>
+      `);
+    }
+
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('encodes path values with %20', async () => {
+      document.body.dispatchEvent( new CustomEvent('uri-parameter-changed', {
+        detail: { name: 'c', value: 'test value' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.equal(element.value, 'https://test%20value.domain.com/api?a=b');
+    });
+
+    it('encodes query values with +', async () => {
+      document.body.dispatchEvent( new CustomEvent('query-parameter-changed', {
+        detail: { name: 'a', value: 'test value' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.equal(element.value, 'https://d.domain.com/api?a=test+value');
+    });
+  });
+
   describe('compatibility mode', () => {
     it('sets compatibility on item when setting legacy', async () => {
       const element = await basicFixture();
