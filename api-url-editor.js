@@ -12,7 +12,6 @@ import '@anypoint-web-components/anypoint-input/anypoint-input.js';
  * It supports validation for URL values that may contain variables.
  *
  * @customElement
- * @polymer
  * @demo demo/index.html
  * @appliesMixin EventsTargetMixin
  * @appliesMixin ValidatableMixin
