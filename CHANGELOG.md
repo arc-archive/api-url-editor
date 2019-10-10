@@ -114,3 +114,18 @@
 
 
 
+## [3.0.5](https://github.com/advanced-rest-client/api-url-editor/compare/2.0.7...3.0.5) (2019-10-10)
+
+
+### Bug Fixes
+
+* fixes APIC-269 - invalid spaces encoding in path part ([713c049](https://github.com/advanced-rest-client/api-url-editor/commit/713c049))
+* fixing installation command in readme ([28b15b5](https://github.com/advanced-rest-client/api-url-editor/commit/28b15b5))
+
+
+### Features
+
+* adding events API for parameters change event ([e21b00f](https://github.com/advanced-rest-client/api-url-editor/commit/e21b00f))
+
+
+
