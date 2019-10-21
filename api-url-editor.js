@@ -18,7 +18,7 @@ import '@anypoint-web-components/anypoint-input/anypoint-input.js';
  * @memberof ApiElements
  */
 class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
-  static get styles() {
+  get styles() {
     return css`:host {
       display: flex;
     }
@@ -39,7 +39,7 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       value,
       required
     } = this;
-    return html`
+    return html`<style>${this.styles}</style>
     <anypoint-input
       ?nolabelfloat="${noLabelFloat}"
       ?disabled="${disabled}"
