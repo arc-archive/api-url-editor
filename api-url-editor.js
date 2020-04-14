@@ -428,10 +428,12 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       if (value.trim() === '') {
         continue;
       }
-      if (name[0] === '+' || name[0] === '#') {
-        value = encodeURI(value);
-      } else {
-        value = this._wwwFormUrlEncodePiece(value, false);
+      if (model.autoEncode) {
+        if (name[0] === '+' || name[0] === '#') {
+          value = encodeURI(value);
+        } else {
+          value = this._wwwFormUrlEncodePiece(value, false);
+        }
       }
       const re = this._createUrlReplaceRegex(name);
       url = url.replace(re, value);
