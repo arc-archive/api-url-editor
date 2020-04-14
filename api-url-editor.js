@@ -428,7 +428,7 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       if (value.trim() === '') {
         continue;
       }
-      if (model.autoEncode) {
+      if (!model.noAutoEncode) {
         if (name[0] === '+' || name[0] === '#') {
           value = encodeURI(value);
         } else {
