@@ -203,6 +203,16 @@ describe('<api-url-editor>', function() {
       element.pathModel = model;
       assert.equal(element.value, 'https://{base}.domain.com/path//test%20and%20extra!');
     });
+
+    it('Does not encode if noAutoEncode is enabled', () => {
+      const item = Object.assign({}, pathlModel);
+      item.noAutoEncode = true;
+      item.name = 'base';
+      item.value = '/test and extra!';
+      const model = [item];
+      element.pathModel = model;
+      assert.equal(element.value, 'https:///test and extra!.domain.com/path/{+var}');
+    })
   });
 
   describe('_computeUrlParams()', () => {

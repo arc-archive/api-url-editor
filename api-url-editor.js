@@ -420,7 +420,9 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       return url;
     }
     const uriParams = this._formValuesFromModel(model);
-    for (let [name, value] of uriParams) {
+    const entries = Array.from(uriParams.entries());
+    for (let i = 0; i < entries.length; i++) {
+      let [name, value] = entries[i];
       if (!value) {
         continue;
       }
@@ -428,10 +430,12 @@ class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)) {
       if (value.trim() === '') {
         continue;
       }
-      if (name[0] === '+' || name[0] === '#') {
-        value = encodeURI(value);
-      } else {
-        value = this._wwwFormUrlEncodePiece(value, false);
+      if (!model[i].noAutoEncode) {
+        if (name[0] === '+' || name[0] === '#') {
+          value = encodeURI(value);
+        } else {
+          value = this._wwwFormUrlEncodePiece(value, false);
+        }
       }
       const re = this._createUrlReplaceRegex(name);
       url = url.replace(re, value);
