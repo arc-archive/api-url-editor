@@ -1,3 +1,4 @@
 {
-  "demo-api/demo-api.raml": "RAML 1.0"
+  "demo-api/demo-api.raml": { "type": "RAML 1.0", "mime": "application/raml" },
+  "multi-server/multi-server.yaml": { "type": "OAS 3.0", "mime": "application/yaml" }
 }

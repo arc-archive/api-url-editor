@@ -1,28 +1,31 @@
-import { html, render } from 'lit-html';
-import { ApiDemoPageBase } from '@advanced-rest-client/arc-demo-helper/ApiDemoPage.js';
-import '@api-components/api-navigation/api-navigation.js';
+import { html } from 'lit-html';
+import { ApiDemoPage } from '@advanced-rest-client/arc-demo-helper';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
 import '@anypoint-web-components/anypoint-styles/colors.js';
 import '@anypoint-web-components/anypoint-checkbox/anypoint-checkbox.js';
 import '@api-components/api-url-data-model/api-url-data-model.js';
-import '@api-components/raml-aware/raml-aware.js';
-import '@anypoint-web-components/anypoint-dropdown-menu/anypoint-dropdown-menu.js';
-import '@anypoint-web-components/anypoint-listbox/anypoint-listbox.js';
 import '@anypoint-web-components/anypoint-item/anypoint-item.js';
+import '@api-components/api-server-selector/api-server-selector.js';
 import '../api-url-editor.js';
 
-class ApiDemo extends ApiDemoPageBase {
+class ApiDemo extends ApiDemoPage {
   constructor() {
     super();
 
     this.initObservableProperties([
-      'mainReadOnly', 'mainDisabled', 'demoOutlined', 'demoCompatibility',
+      'readonly', 'disabled', 'outlined', 'compatibility',
       'baseUri', 'endpointPath', 'queryModel', 'pathModel', 'selectedShape',
-      'mainNoLabelFloat', 'selectedOverrideBase'
+      'mainNoLabelFloat', 'serverValue', 'serverType',
+      'allowCustomBaseUri', 'autoValidate'
     ]);
 
     this.componentName = 'api-url-editor';
     this.demoStates = ['Filled', 'Outlined', 'Anypoint'];
+    this.serverValue = null;
+    this.serverType = null;
+    this.allowCustomBaseUri = false;
+    this.autoValidate = false;
+
     this._mainDemoStateHandler = this._mainDemoStateHandler.bind(this);
     this._toggleMainOption = this._toggleMainOption.bind(this);
     this._baseUrlChangeHandler = this._baseUrlChangeHandler.bind(this);
@@ -30,46 +33,52 @@ class ApiDemo extends ApiDemoPageBase {
     this._queryModelChangeHandler = this._queryModelChangeHandler.bind(this);
     this._pathModelChangeHandler = this._pathModelChangeHandler.bind(this);
     this._mainValueChanged = this._mainValueChanged.bind(this);
-    this._baseUriSelectorHandler = this._baseUriSelectorHandler.bind(this);
+    this._serverCountHandler = this._serverCountHandler.bind(this);
+    this._serverHandler = this._serverHandler.bind(this);
   }
 
-  get helper() {
-    if (!this.__helper) {
-      this.__helper = document.getElementById('helper');
+  get effectiveBaseUri() {
+    const { baseUri, serverValue, serverType } = this;
+    if (serverType === 'custom') {
+      return serverValue;
     }
-    return this.__helper;
+    return baseUri;
+  }
+
+  get server() {
+    const { selectedShape: methodId, selectedEndpointId: endpointId, serverValue, serverType } = this;
+    if (serverType !== 'server') {
+      return null;
+    }
+    const servers = this._getServers({ endpointId, methodId });
+    return servers.find((server) => this._getServerUri(server) === serverValue);
+  }
+
+  /**
+   * @param {Object} server Server definition.
+   * @return {String|undefined} Value for server's base URI
+   */
+  _getServerUri(server) {
+    const key = this._getAmfKey(this.ns.aml.vocabularies.core.urlTemplate);
+    return this._getValue(server, key);
   }
 
   _navChanged(e) {
-    const { selected, type } = e.detail;
+    const { selected, type, endpointId } = e.detail;
     if (type === 'method') {
       this.selectedShape = selected;
+      this.selectedEndpointId = endpointId;
     } else {
       this.selectedShape = undefined;
+      this.selectedEndpointId = undefined;
     }
   }
 
   _mainDemoStateHandler(e) {
     const state = e.detail.value;
-    switch (state) {
-      case 0:
-        this.demoOutlined = false;
-        this.demoCompatibility = false;
-        break;
-      case 1:
-        this.demoOutlined = true;
-        this.demoCompatibility = false;
-        break;
-      case 2:
-        this.demoOutlined = false;
-        this.demoCompatibility = true;
-        break;
-    }
-  }
-
-  _toggleMainOption(e) {
-    const { name, checked } = e.target;
-    this[name] = checked;
+    this.outlined = state === 1;
+    this.compatibility = state === 2;
+    this._updateCompatibility();
   }
 
   _baseUrlChangeHandler(e) {
@@ -92,116 +101,164 @@ class ApiDemo extends ApiDemoPageBase {
     console.log('Demo URL value', e.detail.value);
   }
 
-  _baseUriSelectorHandler(e) {
-    this.selectedOverrideBase = e.detail.value;
+  /**
+   * Handler for the `serverscountchanged` dispatched from the server selector.
+   * @param {CustomEvent} e
+   */
+  _serverCountHandler(e) {
+    const { value } = e.detail;
+    this.serversCount = value;
+  }
+
+  /**
+   * Handler for the `apiserverchanged` dispatched from the server selector.
+   * @param {CustomEvent} e
+   */
+  _serverHandler(e) {
+    const { value, type } = e.detail;
+    this.serverType = type;
+    this.serverValue = value;
+  }
+
+  _apiListTemplate() {
+    return [
+      ['demo-api', 'Demo API'],
+      ['multi-server', 'Multiple servers'],
+    ].map(([file, label]) => html`
+      <anypoint-item data-src="${file}-compact.json">${label} - compact model</anypoint-item>
+      <anypoint-item data-src="${file}.json">${label}</anypoint-item>
+      `);
   }
 
   _demoTemplate() {
     const {
-      mainReadOnly,
-      mainDisabled,
+      readonly,
+      disabled,
       demoStates,
       darkThemeActive,
-      demoOutlined,
-      demoCompatibility,
-      baseUri,
-      selectedOverrideBase,
+      outlined,
+      compatibility,
+      effectiveBaseUri,
       endpointPath,
       queryModel,
       pathModel,
-      mainNoLabelFloat
+      mainNoLabelFloat,
+      autoValidate,
     } = this;
-    const finalBaseUri = selectedOverrideBase ? selectedOverrideBase : baseUri;
-    return html`<section class="documentation-section">
-      <h2>API model demo</h2>
+    return html`
+    <section class="documentation-section">
+      <h3>Interactive demo</h3>
       <p>
         This demo lets you preview the API URL editor element with various
         configuration options.
       </p>
 
-      <section role="main" class="horizontal-section-container centered main">
-        ${this._apiNavigationTemplate()}
-        <div class="demo-container">
-          <arc-interactive-demo
-            .states="${demoStates}"
-            @state-chanegd="${this._mainDemoStateHandler}"
-            ?dark="${darkThemeActive}"
-          >
-            <api-url-editor
-              slot="content"
-              ?readonly="${mainReadOnly}"
-              ?disabled="${mainDisabled}"
-              ?outlined="${demoOutlined}"
-              ?compatibility="${demoCompatibility}"
-              ?noLabelFloat="${mainNoLabelFloat}"
-              .baseUri="${finalBaseUri}"
-              .endpointPath="${endpointPath}"
-              .queryModel="${queryModel}"
-              .pathModel="${pathModel}"
-              @value-changed="${this._mainValueChanged}"></api-url-editor>
+      ${this._serverSelectorTemplate()}
 
-            <label slot="options" id="mainOptionsLabel">Options</label>
+      <arc-interactive-demo
+        .states="${demoStates}"
+        @state-chanegd="${this._mainDemoStateHandler}"
+        ?dark="${darkThemeActive}"
+      >
+        <api-url-editor
+          slot="content"
+          @value-changed="${this._mainValueChanged}"
+          ?readonly="${readonly}"
+          ?disabled="${disabled}"
+          ?outlined="${outlined}"
+          ?compatibility="${compatibility}"
+          ?noLabelFloat="${mainNoLabelFloat}"
+          ?autovalidate="${autoValidate}"
+          required
+          .baseUri="${effectiveBaseUri}"
+          .endpointPath="${endpointPath}"
+          .queryModel="${queryModel}"
+          .pathModel="${pathModel}"
+        ></api-url-editor>
 
-            <anypoint-checkbox
-              aria-describedby="mainOptionsLabel"
-              slot="options"
-              name="mainReadOnly"
-              @change="${this._toggleMainOption}"
-              >Read only</anypoint-checkbox
-            >
-            <anypoint-checkbox
-              aria-describedby="mainOptionsLabel"
-              slot="options"
-              name="mainDisabled"
-              @change="${this._toggleMainOption}"
-              >Disabled</anypoint-checkbox
-            >
+        <label slot="options" id="mainOptionsLabel">Options</label>
 
-            <anypoint-checkbox
-              aria-describedby="mainOptionsLabel"
-              slot="options"
-              name="mainNoLabelFloat"
-              @change="${this._toggleMainOption}"
-              >No label float</anypoint-checkbox
-            >
-          </arc-interactive-demo>
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="readonly"
+          @change="${this._toggleMainOption}"
+          >Read only</anypoint-checkbox
+        >
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="disabled"
+          @change="${this._toggleMainOption}"
+        >Disabled</anypoint-checkbox>
 
-          <anypoint-dropdown-menu class="base-uri-selector">
-            <label slot="label">Override API's base uri</label>
-            <anypoint-listbox
-              slot="dropdown-content"
-              attrforselected="data-url"
-              @selected-changed="${this._baseUriSelectorHandler}">
-              <anypoint-item data-url="">Restore API's base URI</anypoint-item>
-              <anypoint-item data-url="https://domain.com/base">https://domain.com/base</anypoint-item>
-              <anypoint-item
-                data-url="https://{version}.domain.com/base/{path}">
-                https://{version}.domain.com/base/{path}
-              </anypoint-item>
-            </anypoint-listbox>
-          </anypoint-dropdown-menu>
-        </div>
-      </section>
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="mainNoLabelFloat"
+          @change="${this._toggleMainOption}"
+        >No label float</anypoint-checkbox>
+
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="allowCustomBaseUri"
+          @change="${this._toggleMainOption}"
+        >Allow server custom URI</anypoint-checkbox>
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="autoValidate"
+          @change="${this._toggleMainOption}"
+        >Auto validate</anypoint-checkbox>
+      </arc-interactive-demo>
+
     </section>`;
   }
 
-  _render() {
+  /**
+   * @return {TemplateResult} A template for the server selector
+   */
+  _serverSelectorTemplate() {
     const {
-      selectedShape
+      amf,
+      serverType,
+      serverValue,
+      allowCustomBaseUri,
+      outlined,
+      compatibility,
     } = this;
-    render(html`
-      ${this.headerTemplate()}
+    return html`
+    <api-server-selector
+      ?allowCustom="${allowCustomBaseUri}"
+      .amf="${amf}"
+      .value="${serverValue}"
+      .type="${serverType}"
+      autoselect
+      ?compatibility="${compatibility}"
+      ?outlined="${outlined}"
+      @serverscountchanged="${this._serverCountHandler}"
+      @apiserverchanged="${this._serverHandler}"
+    ></api-server-selector>`;
+  }
 
+  contentTemplate() {
+    const { selectedShape, server, amf, baseUri } = this;
+    return html`
       <api-url-data-model
-        aware="model"
         @apibaseuri-changed="${this._baseUrlChangeHandler}"
         @endpointpath-changed="${this._endpointPathChangeHandler}"
-        .selected="${selectedShape}"
         @pathmodel-changed="${this._pathModelChangeHandler}"
-        @querymodel-changed="${this._queryModelChangeHandler}"></api-url-data-model>
+        @querymodel-changed="${this._queryModelChangeHandler}"
+        .amf="${amf}"
+        .apiUri="${baseUri}"
+        .selected="${selectedShape}"
+        .server="${server}"
+      ></api-url-data-model>
 
+      <h2 class="centered main">API URI editor</h2>
       ${this._demoTemplate()}
-      `, document.querySelector('#demo'));
+      `;
   }
 }
 const instance = new ApiDemo();
