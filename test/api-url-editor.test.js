@@ -237,44 +237,6 @@ describe('<api-url-editor>', function() {
     });
   });
 
-  describe('fire()', () => {
-    let element;
-    beforeEach(async () => {
-      element = await basicFixture();
-    });
-
-    const eventName = 'test-event';
-    const eventDetail = { type: 'test-detail' };
-
-    it('Dispatches the event', () => {
-      const spy = sinon.spy();
-      element.addEventListener(eventName, spy);
-      element.fire(eventName, eventDetail);
-      assert.isTrue(spy.called);
-    });
-
-    it('Returns the event', () => {
-      const e = element.fire(eventName, eventDetail);
-      assert.typeOf(e, 'customevent');
-      assert.equal(e.type, eventName);
-    });
-
-    it('Event has detail', () => {
-      const e = element.fire(eventName, eventDetail);
-      assert.deepEqual(e.detail, eventDetail);
-    });
-
-    it('Event is cancelable', () => {
-      const e = element.fire(eventName, eventDetail);
-      assert.isFalse(e.cancelable);
-    });
-
-    it('Event bubbles', () => {
-      const e = element.fire(eventName, eventDetail);
-      assert.isTrue(e.bubbles);
-    });
-  });
-
   describe('_computeUrlRegexp()', () => {
     let element;
     beforeEach(async () => {

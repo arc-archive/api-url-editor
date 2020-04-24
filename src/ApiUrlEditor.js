@@ -4,6 +4,15 @@ import { EventsTargetMixin } from '@advanced-rest-client/events-target-mixin/eve
 import '@anypoint-web-components/anypoint-input/anypoint-input.js';
 
 /**
+ * @typedef {Object} ParamsObject
+ * @property {String} name
+ * @property {String} value
+ */
+
+ /** @typedef {import('@anypoint-web-components/anypoint-input/index.js').AnypointInput} AnypointInput */
+ /** @typedef {import('lit-html').TemplateResult} TemplateResult */
+
+/**
  * `api-url-editor`
  * An AMF powered url editor for the HTTP request editor.
  *
@@ -28,6 +37,9 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     }`;
   }
 
+  /**
+   * @return {TemplateResult} Main template result.
+   */
   render() {
     const {
       noLabelFloat,
@@ -57,6 +69,9 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     </anypoint-input>`;
   }
 
+  /**
+   * @return {AnypointInput} A reference to the input element.
+   */
   get inputElement() {
     return this.shadowRoot.querySelector('anypoint-input');
   }
@@ -153,7 +168,7 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     }
     this._value = value;
     this.requestUpdate('value', old);
-    this._onValueChanged(value);
+    this._onValueChanged();
     this.dispatchEvent(new CustomEvent('value-changed', {
       detail: {
         value
@@ -243,14 +258,14 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     }));
   }
   /**
-   * @return {Function} Previously registered handler for `value-changed` event
+   * @return {EventListener} Previously registered handler for `value-changed` event
    */
   get onvalue() {
     return this['_onvalue-changed'];
   }
   /**
    * Registers a callback function for `value-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onvalue(value) {
@@ -263,6 +278,14 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     this._focusHandler = this._focusHandler.bind(this);
     this._queryParamChangeHandler = this._queryParamChangeHandler.bind(this);
     this._uriParamChangeHandler = this._uriParamChangeHandler.bind(this);
+
+
+    this.noLabelFloat = false;
+    this.disabled = false;
+    this.readOnly = false;
+    this.invalid = false;
+    this.outlined = false;
+    this.required = false;
   }
 
   firstUpdated() {
@@ -308,7 +331,7 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
   /**
    * Registers an event handler for given type
    * @param {String} eventType Event type (name)
-   * @param {Function} value The handler to register
+   * @param {EventListener} value The handler to register
    */
   _registerCallback(eventType, value) {
     const key = `_on${eventType}`;
@@ -467,24 +490,25 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     if (!model) {
       return url;
     }
-    let params = this._formValuesFromModel(model);
+    const params = this._formValuesFromModel(model);
     const items = this._computeQueryItems(params);
-    params = this._wwwFormUrlEncode(items);
-    if (!params) {
+    const stringParams = this._wwwFormUrlEncode(items);
+    if (!stringParams) {
       return url;
     }
     url += (url.indexOf('?') === -1) ? '?' : '&';
-    url += params;
+    url += stringParams;
     return url;
   }
+
   /**
    * Computes query parameters list of items containing `name` and `value`
    * properties to use to build query string.
    *
    * This function may change the `params` map.
    *
-   * @param {Object} params Map of query model properties.
-   * @return {Array} List of query parameters.
+   * @param {Map} params Map of query model properties.
+   * @return {Array<ParamsObject>} List of query parameters.
    */
   _computeQueryItems(params) {
     const items = [];
@@ -503,22 +527,22 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
         for (let i = 0, len = value.length; i < len; i++) {
           if (value || value === 0 || value === false) {
             items.push({
-              name: name,
+              name,
               value: value[i]
             });
           }
         }
       } else {
         items.push({
-          name: name,
-          value: value
+          name,
+          value,
         });
       }
     }
     return items;
   }
   /**
-   * @param {Array} object The list of objects to encode as
+   * @param {Array<ParamsObject>} object The list of objects to encode as
    * x-www-form-urlencoded string. Each entry should have `name` and `value`
    * properties.
    * @return {string} .
@@ -556,7 +580,7 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
    * @param {Event} e Input event
    */
   __userInputHandler(e) {
-    const value = e.target.value;
+    const value = /** @type {HTMLInputElement} */ (e.target).value;
     let matches;
     const uriParams = this._urlParams;
     const uriRegexp = this._urlSearchRegexp;
@@ -674,9 +698,16 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     if (!this._elementReady || this.__cancelValueChange) {
       return;
     }
-    this.fire('url-value-changed', {
-      value: this.value
+    const e = new CustomEvent('url-value-changed', {
+      bubbles: true,
+      composed: true,
+      cancelable: false,
+      detail: {
+        value: this.value
+      }
     });
+    this.dispatchEvent(e);
+
     this.validate();
   }
 
@@ -729,7 +760,7 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
    * parameters in the `value` url.
    *
    * @param {String} url Enpoint's absolute URL with (possibly) parameters.
-   * @return {String} A RegExp that can be used to search for parameters values.
+   * @return {RegExp} A RegExp that can be used to search for parameters values.
    */
   _computeUrlRegexp(url) {
     if (!url) {
@@ -765,17 +796,6 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
       paramsNames = paramsNames.map((item) => item.substr(1, item.length - 2));
     }
     return paramsNames;
-  }
-
-  fire(type, detail) {
-    const e = new CustomEvent(type, {
-      bubbles: true,
-      composed: true,
-      cancelable: false,
-      detail
-    });
-    this.dispatchEvent(e);
-    return e;
   }
 
   /**

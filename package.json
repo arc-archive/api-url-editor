@@ -48,7 +48,9 @@
     "es-dev-server": "^1.46.5",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.7",
-    "sinon": "^9.0.2"
+    "sinon": "^9.0.2",
+    "typescript": "^3.8.3",
+    "typescript-lit-html-plugin": "^0.9.0"
   },
   "scripts": {
     "test": "karma start --coverage",
@@ -59,6 +61,7 @@
     "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
     "format:prettier": "prettier \"**/*.js\" --write",
     "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:types": "tsc",
     "format": "npm run format:eslint && npm run format:prettier",
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "test:sl": "karma start karma.sl.config.js --compatibility all --coverage",
