@@ -1,6 +1,6 @@
 [![Published on NPM](https://img.shields.io/npm/v/@api-components/api-url-editor.svg)](https://www.npmjs.com/package/@api-components/api-url-editor)
 
-[![Build Status](https://travis-ci.org/advanced-rest-client/api-url-editor.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/api-url-editor)
+[![Build Status](https://travis-ci.com/advanced-rest-client/api-url-editor.svg)](https://travis-ci.org/advanced-rest-client/api-url-editor)
 
 # api-url-editor
 
@@ -11,6 +11,7 @@ It uses [api-url-data-model](https://github.com/advanced-rest-client/api-url-dat
 ```html
 <api-url-editor
   required
+  amf="..."
   baseuri="https://api.domain.com"
   endpointpath="/users/me"
   querymodel="..."
@@ -42,7 +43,9 @@ npm install --save @api-components/api-url-editor
     <api-url-editor></api-url-editor>
     <script>
     {
-      document.querySelector('api-url-editor').onvalue = (e) {
+      const editor = document.querySelector('api-url-editor');
+      editor.amf = {...};
+      editor.onvalue = (e) {
         console.log('URL value', e.target.value);
       };
     }
@@ -57,7 +60,7 @@ npm install --save @api-components/api-url-editor
 import { LitElement, html } from 'lit-element';
 import '@api-components/api-url-editor/api-url-editor.js';
 
-class SampleElement extends PolymerElement {
+class SampleElement extends LitElement {
   render() {
     return html`
     <api-url-editor
@@ -66,6 +69,7 @@ class SampleElement extends PolymerElement {
       ?outlined="${this.outlined}"
       ?legacy="${this.legacy}"
       ?noLabelFloat="${this.noLabelFloat}"
+      .amf="${this.amf}"
       .baseUri="${this.apiBaseUri}"
       .endpointPath="${this.endpointPath}"
       .queryModel="${this.queryModel}"
@@ -103,9 +107,11 @@ import '@api-components/api-url-data-model/api-url-data-model.js';
 
   const model = document.querySelector('api-url-data-model');
   model.amf = api; // This is required to compute ld+json keys!
+  model.server = server; // a server for current selection
   model.selected = selectedEndpoint;
 
   const editor = document.querySelector('api-url-editor');
+  model.amf = api;
   editor.baseUri = model.apiBaseUri;
   editor.endpointPath = model.endpointPath;
   editor.queryModel = model.queryModel;
@@ -120,7 +126,7 @@ import '@api-components/api-url-data-model/api-url-data-model.js';
 import { LitElement, html } from 'lit-element';
 import '@api-components/api-url-editor/api-url-editor.js';
 
-class SampleElement extends PolymerElement {
+class SampleElement extends LitElement {
   static get properties() {
     return {
       amfModel: { type: Object },
@@ -136,18 +142,21 @@ class SampleElement extends PolymerElement {
   render() {
     return html`
     <api-url-data-model
-      .selected="${this.selectedShape}"
-      .amf="${this.amfModel}"
       @apibaseuri-changed="${this._baseUrlChangeHandler}"
       @endpointpath-changed="${this._endpointPathChangeHandler}"
       @pathmodel-changed="${this._pathModelChangeHandler}"
-      @querymodel-changed="${this._queryModelChangeHandler}"></api-url-data-model>
+      @querymodel-changed="${this._queryModelChangeHandler}"
+      .server="${server}"
+      .selected="${this.selectedShape}"
+      .amf="${this.amfModel}"
+    ></api-url-data-model>
     <api-url-editor
       required
       ?disabled="${this.disabled}"
       ?outlined="${this.outlined}"
-      ?legacy="${this.legacy}"
+      ?compatibility="${this.compatibility}"
       ?noLabelFloat="${this.noLabelFloat}"
+      .amf="${this.amfModel}"
       .baseUri="${this.apiBaseUri}"
       .endpointPath="${this.endpointPath}"
       .queryModel="${this.queryModel}"
