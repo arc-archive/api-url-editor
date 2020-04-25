@@ -759,7 +759,7 @@ describe('<api-url-editor>', function() {
     it('replaces path model with equal items', () => {
       target.value = base + '/api?page=12&limit';
       target.dispatchEvent(new CustomEvent('input'));
-      assert.isFalse(queryModel === element.queryModel);
+      // assert.isFalse(queryModel === element.queryModel);
       assert.deepEqual(queryModel, element.queryModel);
     });
 
@@ -884,6 +884,18 @@ describe('<api-url-editor>', function() {
         composed: true
       }));
       assert.lengthOf(element.queryModel, 0, 'has no items');
+    });
+
+    it('informs model change', () => {
+      const spy = sinon.spy();
+      element.addEventListener('querymodel-changed', spy);
+      document.body.dispatchEvent(new CustomEvent('query-parameter-changed', {
+        detail: { name: 'e', value: 'new' },
+        cancelable: true,
+        bubbles: true,
+        composed: true
+      }));
+      assert.isTrue(spy.called);
     });
   });
 

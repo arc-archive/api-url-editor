@@ -16,7 +16,7 @@ class ApiDemo extends ApiDemoPage {
       'readonly', 'disabled', 'outlined', 'compatibility',
       'baseUri', 'endpointPath', 'queryModel', 'pathModel', 'selectedShape',
       'mainNoLabelFloat', 'serverValue', 'serverType',
-      'allowCustomBaseUri', 'autoValidate'
+      'allowCustomBaseUri'
     ]);
 
     this.componentName = 'api-url-editor';
@@ -24,7 +24,9 @@ class ApiDemo extends ApiDemoPage {
     this.serverValue = null;
     this.serverType = null;
     this.allowCustomBaseUri = false;
-    this.autoValidate = false;
+    this.readonly = false;
+    this.disabled = false;
+    this.mainNoLabelFloat = false;
 
     this._mainDemoStateHandler = this._mainDemoStateHandler.bind(this);
     this._toggleMainOption = this._toggleMainOption.bind(this);
@@ -37,21 +39,24 @@ class ApiDemo extends ApiDemoPage {
     this._serverHandler = this._serverHandler.bind(this);
   }
 
-  get effectiveBaseUri() {
-    const { baseUri, serverValue, serverType } = this;
+  get dataModelBaseUri() {
+    const { serverValue, serverType } = this;
     if (serverType === 'custom') {
       return serverValue;
     }
-    return baseUri;
+    return null;
   }
 
   get server() {
     const { selectedShape: methodId, selectedEndpointId: endpointId, serverValue, serverType } = this;
     if (serverType !== 'server') {
+      console.log('Not a "server" server', serverType);
       return null;
     }
     const servers = this._getServers({ endpointId, methodId });
-    return servers.find((server) => this._getServerUri(server) === serverValue);
+    const server = servers.find((server) => this._getServerUri(server) === serverValue);
+    console.log('Found server:', server);
+    return server;
   }
 
   /**
@@ -82,6 +87,7 @@ class ApiDemo extends ApiDemoPage {
   }
 
   _baseUrlChangeHandler(e) {
+    console.log('Base URI changed', e.detail.value);
     this.baseUri = e.detail.value;
   }
 
@@ -118,12 +124,13 @@ class ApiDemo extends ApiDemoPage {
     const { value, type } = e.detail;
     this.serverType = type;
     this.serverValue = value;
+    console.log('Server changed: ', type, value);
   }
 
   _apiListTemplate() {
     return [
-      ['demo-api', 'Demo API'],
       ['multi-server', 'Multiple servers'],
+      ['demo-api', 'Demo API'],
     ].map(([file, label]) => html`
       <anypoint-item data-src="${file}-compact.json">${label} - compact model</anypoint-item>
       <anypoint-item data-src="${file}.json">${label}</anypoint-item>
@@ -138,12 +145,12 @@ class ApiDemo extends ApiDemoPage {
       darkThemeActive,
       outlined,
       compatibility,
-      effectiveBaseUri,
+      baseUri,
       endpointPath,
       queryModel,
       pathModel,
       mainNoLabelFloat,
-      autoValidate,
+      amf,
     } = this;
     return html`
     <section class="documentation-section">
@@ -168,9 +175,9 @@ class ApiDemo extends ApiDemoPage {
           ?outlined="${outlined}"
           ?compatibility="${compatibility}"
           ?noLabelFloat="${mainNoLabelFloat}"
-          ?autovalidate="${autoValidate}"
           required
-          .baseUri="${effectiveBaseUri}"
+          .amf="${amf}"
+          .baseUri="${baseUri}"
           .endpointPath="${endpointPath}"
           .queryModel="${queryModel}"
           .pathModel="${pathModel}"
@@ -205,19 +212,13 @@ class ApiDemo extends ApiDemoPage {
           name="allowCustomBaseUri"
           @change="${this._toggleMainOption}"
         >Allow server custom URI</anypoint-checkbox>
-        <anypoint-checkbox
-          aria-describedby="mainOptionsLabel"
-          slot="options"
-          name="autoValidate"
-          @change="${this._toggleMainOption}"
-        >Auto validate</anypoint-checkbox>
       </arc-interactive-demo>
 
     </section>`;
   }
 
   /**
-   * @return {TemplateResult} A template for the server selector
+   * @return {object} A template for the server selector
    */
   _serverSelectorTemplate() {
     const {
@@ -243,7 +244,7 @@ class ApiDemo extends ApiDemoPage {
   }
 
   contentTemplate() {
-    const { selectedShape, server, amf, baseUri } = this;
+    const { selectedShape, server, amf, dataModelBaseUri } = this;
     return html`
       <api-url-data-model
         @apibaseuri-changed="${this._baseUrlChangeHandler}"
@@ -251,16 +252,15 @@ class ApiDemo extends ApiDemoPage {
         @pathmodel-changed="${this._pathModelChangeHandler}"
         @querymodel-changed="${this._queryModelChangeHandler}"
         .amf="${amf}"
-        .apiUri="${baseUri}"
+        .apiUri="${dataModelBaseUri}"
         .selected="${selectedShape}"
         .server="${server}"
       ></api-url-data-model>
 
-      <h2 class="centered main">API URI editor</h2>
+      <h2 class="centered main">API URL editor</h2>
       ${this._demoTemplate()}
       `;
   }
 }
 const instance = new ApiDemo();
 instance.render();
-window.demoInstance = instance;

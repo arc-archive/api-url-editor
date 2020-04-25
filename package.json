@@ -24,6 +24,7 @@
     "@advanced-rest-client/events-target-mixin": "^3.0.0",
     "@anypoint-web-components/anypoint-input": "^0.2.6",
     "@anypoint-web-components/validatable-mixin": "^1.0.2",
+    "@api-components/api-view-model-transformer": "^4.1.0",
     "lit-element": "^2.0.1",
     "lit-html": "^1.1.2"
   },
@@ -38,7 +39,7 @@
     "@api-components/api-model-generator": "^0.2.0-rc.1",
     "@api-components/api-navigation": "^4.0.0",
     "@api-components/api-server-selector": "^0.4.0",
-    "@api-components/api-url-data-model": "^5.0.0",
+    "@api-components/api-url-data-model": "^5.0.1",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@open-wc/testing": "^2.5.13",

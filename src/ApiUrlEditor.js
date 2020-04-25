@@ -1,6 +1,7 @@
 import { html, css, LitElement } from 'lit-element';
 import { ValidatableMixin } from '@anypoint-web-components/validatable-mixin/validatable-mixin.js';
 import { EventsTargetMixin } from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
+import { ApiViewModel } from '@api-components/api-view-model-transformer';
 import '@anypoint-web-components/anypoint-input/anypoint-input.js';
 
 /**
@@ -11,6 +12,7 @@ import '@anypoint-web-components/anypoint-input/anypoint-input.js';
 
  /** @typedef {import('@anypoint-web-components/anypoint-input/index.js').AnypointInput} AnypointInput */
  /** @typedef {import('lit-html').TemplateResult} TemplateResult */
+ /** @typedef {import('@api-components/api-view-model-transformer/src/ApiViewModel').ModelItem} ModelItem */
 
 /**
  * `api-url-editor`
@@ -145,6 +147,11 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
        * Enables Material Design outlined style
        */
       outlined: { type: Boolean },
+
+      /**
+       * AMF model used to compute view model.
+       */
+      amf: { type: Object },
     };
   }
 
@@ -232,11 +239,6 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     }
     this._queryModel = value;
     this._computeValue(value, this.pathModel, this._fullUri);
-    this.dispatchEvent(new CustomEvent('querymodel-changed', {
-      detail: {
-        value
-      }
-    }));
   }
 
   get pathModel() {
@@ -251,11 +253,6 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     }
     this._pathModel = value;
     this._computeValue(this.queryModel, value, this._fullUri);
-    this.dispatchEvent(new CustomEvent('pathmodel-changed', {
-      detail: {
-        value
-      }
-    }));
   }
   /**
    * @return {EventListener} Previously registered handler for `value-changed` event
@@ -650,8 +647,22 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     }
     if (changed) {
       this.pathModel = [...this.pathModel];
+      this._notifyPathModel(this.pathModel);
     }
   }
+
+  /**
+   * Dispatches `pathmodel-changed` custom event.
+   * @param {Array<Object>} value
+   */
+  _notifyPathModel(value) {
+    this.dispatchEvent(new CustomEvent('pathmodel-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+
   /**
    * Applies query parameters values to the render list.
    *
@@ -680,8 +691,20 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
     });
     if (changed) {
       this.queryModel = [...this.queryModel];
-      changed = true;
+      this._notifyQueryModel(this.queryModel);
     }
+  }
+
+  /**
+   * Dispatches `querymodel-changed` custom event.
+   * @param {Array<Object>} value
+   */
+  _notifyQueryModel(value) {
+    this.dispatchEvent(new CustomEvent('querymodel-changed', {
+      detail: {
+        value
+      }
+    }));
   }
 
   _findModelIndex(name, type) {
@@ -857,8 +880,21 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
       }
     }
     this[modelPath] = [...model];
+    if (type === 'query') {
+      this._notifyQueryModel(model);
+    } else {
+      this._notifyPathModel(model);
+    }
   }
 
+  /**
+   * Creates a view model for a property that has not been originally in
+   * the URL model (e.g. custom query parameter)
+   *
+   * @param {string} name Parameter name
+   * @param {string} value Parameter value
+   * @return {ModelItem} View model
+   */
   _buildPropertyItem(name, value) {
     const item = {
       name,
@@ -867,15 +903,7 @@ export class ApiUrlEditor extends EventsTargetMixin(ValidatableMixin(LitElement)
         type: 'string'
       }
     };
-    // api-view-model-transformer handles this event. If it's not in the DOM then it
-    // uses the base item object.
-    const e = new CustomEvent('api-property-model-build', {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: item
-    });
-    this.dispatchEvent(e);
-    return item;
+    const worker = new ApiViewModel({ amf: this.amf });
+    return worker.buildProperty(item);
   }
 }
