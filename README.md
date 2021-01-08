@@ -18,6 +18,10 @@ It uses [api-url-data-model](https://github.com/advanced-rest-client/api-url-dat
   pathmodel="..."></api-url-editor>
 ```
 
+## Deprecation notice
+
+This element is moved to `api-url` repository and `@api-components/api-url` package. This element will be deprecated and archived once the migration finish.
+
 ## Version compatibility
 
 This version only works with AMF model version 2 (AMF parser >= 4.0.0).
@@ -26,6 +30,7 @@ For compatibility with previous model version use `3.x.x` version of the compone
 ## Usage
 
 ### Installation
+
 ```
 npm install --save @api-components/api-url-editor
 ```
